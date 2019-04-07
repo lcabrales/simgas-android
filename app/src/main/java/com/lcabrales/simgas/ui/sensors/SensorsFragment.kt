@@ -1,12 +1,15 @@
 package com.lcabrales.simgas.ui.sensors
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.UiThread
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.lcabrales.simgas.R
+import com.lcabrales.simgas.databinding.FragmentSensorsBinding
 
 class SensorsFragment : androidx.fragment.app.Fragment() {
 
@@ -15,16 +18,26 @@ class SensorsFragment : androidx.fragment.app.Fragment() {
     }
 
     private lateinit var viewModel: SensorsViewModel
+    private lateinit var binding: FragmentSensorsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.sensors_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sensors, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(SensorsViewModel::class.java)
-        // TODO: Use the ViewModel
+        subscribe()
     }
 
+    private fun subscribe() {
+        viewModel.getObserverShowLoading().observe(viewLifecycleOwner, Observer(this::showLoading))
+    }
+
+    @UiThread
+    private fun showLoading(show: Boolean) {
+        binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+    }
 }
