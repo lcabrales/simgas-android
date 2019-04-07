@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lcabrales.simgas.base.BaseViewModel
 import com.lcabrales.simgas.data.RemoteApiInterface
 import com.lcabrales.simgas.model.sensors.GetSensorsResponse
+import com.lcabrales.simgas.model.sensors.Sensor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -20,6 +21,7 @@ class SensorsViewModel : BaseViewModel() {
     lateinit var remoteApiInterface: RemoteApiInterface
 
     private val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    private val sendSensorsDataLiveData: MutableLiveData<List<Sensor>> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -55,13 +57,19 @@ class SensorsViewModel : BaseViewModel() {
 
     private fun onRetrievePostListSuccess(response: GetSensorsResponse) {
         Log.d(TAG, "onRetrievePostListSuccess: $response")
+
+        sendSensorsDataLiveData.value = response.data
     }
 
     private fun onRetrievePostListError() {
 
     }
 
-    fun getObserverShowLoading(): MutableLiveData<Boolean> {
+    fun getObservableShowLoading(): MutableLiveData<Boolean> {
         return showLoadingLiveData
+    }
+
+    fun getObservableSensorData(): MutableLiveData<List<Sensor>> {
+        return sendSensorsDataLiveData
     }
 }
