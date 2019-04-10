@@ -1,5 +1,7 @@
 package com.lcabrales.simgas.common
 
+import com.github.marlonlom.utilities.timeago.TimeAgo
+import com.github.marlonlom.utilities.timeago.TimeAgoMessages
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,5 +18,15 @@ object Dates {
         val targetFormat = SimpleDateFormat(outputFormat, Locale.US)
         val date = originalFormat.parse(originalDateString)
         return targetFormat.format(date)
+    }
+
+    fun getFormattedDate(dateString: String?, inputFormat: String) : Date {
+        val format = SimpleDateFormat(inputFormat, Locale.US)
+        return format.parse(dateString)
+    }
+
+    fun getRelativeTimeString(timeInMillis: Long, locale: Locale = Locale.getDefault()): String {
+        val messages = TimeAgoMessages.Builder().withLocale(locale).build()
+        return TimeAgo.using(timeInMillis, messages)
     }
 }

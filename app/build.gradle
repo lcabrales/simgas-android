@@ -78,6 +78,9 @@ dependencies {
 
     //KTX
     implementation "androidx.core:core-ktx:$ktx_version"
+
+    //Time Ago
+    implementation 'com.github.marlonlom:timeago:4.0.1'
     
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'

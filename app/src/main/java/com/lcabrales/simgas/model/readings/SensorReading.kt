@@ -17,6 +17,8 @@ data class SensorReading(
     var knownConcentrationSensorResistance: Int? = null,
     @Json(name = "GasPpm")
     var gasPpm: Int? = null,
+    @Json(name = "GasPercentage")
+    var gasPercentage: Double? = null,
     @Json(name = "CreatedDate")
     var createdDate: String? = null
 )
