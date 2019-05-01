@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--region Login-->
+    <string name="login_activity_username_hint">Usuario</string>
+    <string name="login_activity_password_hint">Contraseña</string>
+    <string name="login_activity_button_login">Iniciar Sesión</string>
+    <string name="login_activity_button_register">Nueva Cuenta</string>
+    <!--endregion-->
+</resources>

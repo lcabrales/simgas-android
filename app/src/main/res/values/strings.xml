@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">SIMGAS</string>
+    <string name="app_name" translatable="false">SIMGAS</string>
+
+    <!--region Login-->
+    <string name="login_activity_username_hint">Username</string>
+    <string name="login_activity_password_hint">Password</string>
+    <string name="login_activity_button_login">Login</string>
+    <string name="login_activity_button_register">New Account</string>
+    <!--endregion-->
 </resources>

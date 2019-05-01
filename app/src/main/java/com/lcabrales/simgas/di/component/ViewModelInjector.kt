@@ -1,6 +1,7 @@
 package com.lcabrales.simgas.di.component
 
 import com.lcabrales.simgas.di.module.NetworkModule
+import com.lcabrales.simgas.ui.login.LoginViewModel
 import com.lcabrales.simgas.ui.sensors.SensorsViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -11,14 +12,14 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [(NetworkModule::class)])
 interface ViewModelInjector {
-    /**
-     * Injects required dependencies into the specified SensorsViewModel.
-     * @param sensorsViewModel SensorsViewModel in which to inject the dependencies
-     */
+
     fun inject(sensorsViewModel: SensorsViewModel)
+
+    fun inject(loginViewModel: LoginViewModel)
 
     @Component.Builder
     interface Builder {
+
         fun build(): ViewModelInjector
 
         fun networkModule(networkModule: NetworkModule): Builder
