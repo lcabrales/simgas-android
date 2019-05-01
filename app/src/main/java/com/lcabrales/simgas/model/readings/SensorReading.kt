@@ -1,5 +1,6 @@
 package com.lcabrales.simgas.model.readings
 
+import com.lcabrales.simgas.model.airquality.AirQuality
 import com.squareup.moshi.Json
 
 data class SensorReading(
@@ -7,8 +8,8 @@ data class SensorReading(
     var sensorReadingId: String? = null,
     @Json(name = "SensorId")
     var sensorId: String? = null,
-    @Json(name = "AirQualityId")
-    var airQualityId: String? = null,
+    @Json(name = "AirQuality")
+    var airQuality: AirQuality? = null,
     @Json(name = "ReadingVolts")
     var readingVolts: Int? = null,
     @Json(name = "SensorResistance")

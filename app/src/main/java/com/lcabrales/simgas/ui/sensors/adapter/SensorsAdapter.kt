@@ -1,5 +1,7 @@
 package com.lcabrales.simgas.ui.sensors.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +11,6 @@ import com.lcabrales.simgas.model.sensors.Sensor
 
 class SensorsAdapter(private val dataset: List<Sensor>) :
     RecyclerView.Adapter<SensorItemViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SensorItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -34,7 +35,8 @@ class SensorsAdapter(private val dataset: List<Sensor>) :
         val progressVal = (item.lastSensorReading?.gasPercentage!! * holder.getBinding().pbLastReading.max).toInt()
         holder.getBinding().pbLastReading.progress = progressVal
 
-        //todo colored progress bar
+        val airQualityColor = Color.parseColor(item.lastSensorReading?.airQuality?.primaryColor)
+        holder.getBinding().pbLastReading.progressTintList = ColorStateList.valueOf(airQualityColor)
     }
 
     private fun getItem(position: Int): Sensor {
