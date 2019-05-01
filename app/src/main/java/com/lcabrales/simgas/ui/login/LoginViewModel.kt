@@ -27,6 +27,8 @@ class LoginViewModel : BaseViewModel() {
     val loginCompletedLiveData: MutableLiveData<User> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
     val enableLoginButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val clearUserFieldLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val clearPasswordFieldLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -36,7 +38,7 @@ class LoginViewModel : BaseViewModel() {
     }
 
     fun sendLoginRequest(username: String, password: String) {
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
             showToastLiveData.value = R.string.login_activity_empty_fields
             return
         }
@@ -44,14 +46,14 @@ class LoginViewModel : BaseViewModel() {
         val request = LoginRequest(username, password)
 
         val disposable = remoteApiInterface.login(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { onLoginRequestStart() }
-                .doOnTerminate { onLoginRequestFinish() }
-                .subscribe(
-                        { response -> onLoginRequestSuccess(response) },
-                        { onLoginRequestError() }
-                )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { onLoginRequestStart() }
+            .doOnTerminate { onLoginRequestFinish() }
+            .subscribe(
+                { response -> onLoginRequestSuccess(response) },
+                { onLoginRequestError() }
+            )
         disposables.add(disposable)
     }
 
@@ -68,12 +70,24 @@ class LoginViewModel : BaseViewModel() {
     private fun onLoginRequestSuccess(response: LoginResponse) {
         Log.d(TAG, "onLoginRequestSuccess: $response")
 
-        //todo save in database
+        if (response.result?.code == 400) {
+            //user does not exist
+            showToastLiveData.value = R.string.login_activity_user_does_not_exist
+            clearUserFieldLiveData.value = true
+            clearPasswordFieldLiveData.value = true
+            return
+        } else if (response.result?.code == 401) {
+            //invalid credentials
+            showToastLiveData.value = R.string.login_activity_invalid_credentials
+            clearPasswordFieldLiveData.value = true
+            return
+        }
 
+        //todo save in database
         loginCompletedLiveData.value = response.user
     }
 
     private fun onLoginRequestError() {
-
+        showToastLiveData.value = R.string.network_error
     }
 }

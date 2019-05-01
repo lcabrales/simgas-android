@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--region Common-->
+    <string name="network_error">Ha ocurrido un error de conexión</string>
+    <!--endregion-->
+
     <!--region Login-->
     <string name="login_activity_username_hint">Usuario</string>
     <string name="login_activity_password_hint">Contraseña</string>
     <string name="login_activity_button_login">Iniciar Sesión</string>
     <string name="login_activity_button_register">Nueva Cuenta</string>
     <string name="login_activity_empty_fields">Introduzca sus credenciales para iniciar sesión</string>
+    <string name="login_activity_user_does_not_exist">El usuario no existe</string>
+    <string name="login_activity_invalid_credentials">Credenciales inválidas. Verifique la contraseña</string>
     <!--endregion-->
 </resources>

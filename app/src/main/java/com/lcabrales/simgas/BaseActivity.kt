@@ -16,5 +16,6 @@ abstract class BaseActivity : AppCompatActivity() {
             view = View(this)
         }
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+        view.clearFocus()
     }
 }

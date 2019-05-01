@@ -14,12 +14,13 @@ import androidx.lifecycle.ViewModelProviders
 import com.lcabrales.simgas.BaseActivity
 import com.lcabrales.simgas.MainActivity
 import com.lcabrales.simgas.R
+import com.lcabrales.simgas.databinding.ActivityLoginBinding
 import com.lcabrales.simgas.model.session.User
 
 class LoginActivity : BaseActivity() {
 
     private lateinit var viewModel: LoginViewModel
-    private lateinit var binding: com.lcabrales.simgas.databinding.ActivityLoginBinding
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,8 @@ class LoginActivity : BaseActivity() {
         viewModel.showToastLiveData.observe(this, Observer(this::showToast))
         viewModel.loginCompletedLiveData.observe(this, Observer(this::completeLogin))
         viewModel.enableLoginButtonLiveData.observe(this, Observer(this::enableLoginButton))
+        viewModel.clearUserFieldLiveData.observe(this, Observer(this::clearUserField))
+        viewModel.clearPasswordFieldLiveData.observe(this, Observer(this::clearPasswordField))
     }
 
     private fun setOnClickListeners() {
@@ -76,6 +79,20 @@ class LoginActivity : BaseActivity() {
     @UiThread
     private fun enableLoginButton(enable: Boolean) {
         binding.btnLogin.isEnabled = enable
+    }
+
+    @UiThread
+    private fun clearUserField(clear: Boolean) {
+        if (!clear) return
+
+        binding.etUsername.text = null
+    }
+
+    @UiThread
+    private fun clearPasswordField(clear: Boolean) {
+        if (!clear) return
+
+        binding.etPassword.text = null
     }
 
     @UiThread

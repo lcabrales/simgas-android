@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name" translatable="false">SIMGAS</string>
 
+    <!--region Common-->
+    <string name="network_error">A network error has occurred</string>
+    <!--endregion-->
+
     <!--region Login-->
     <string name="login_activity_username_hint">Username</string>
     <string name="login_activity_password_hint">Password</string>
     <string name="login_activity_button_login">Login</string>
     <string name="login_activity_button_register">New Account</string>
     <string name="login_activity_empty_fields">Enter your credentials to login</string>
+    <string name="login_activity_user_does_not_exist">User does not exist</string>
+    <string name="login_activity_invalid_credentials">Invalid credentials. Verify your password.</string>
     <!--endregion-->
 </resources>
