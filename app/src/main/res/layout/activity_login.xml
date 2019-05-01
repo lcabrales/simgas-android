@@ -55,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:imeOptions="actionSend"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/login_activity_button_login"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/pb_loading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_password" />
 
@@ -77,5 +78,17 @@
             app:layout_constraintBottom_toBottomOf="@id/btn_login"
             app:layout_constraintEnd_toStartOf="@id/btn_login"
             app:layout_constraintTop_toTopOf="@id/btn_login" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_login"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

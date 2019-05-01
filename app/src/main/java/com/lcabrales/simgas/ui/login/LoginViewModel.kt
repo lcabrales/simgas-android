@@ -1,7 +1,9 @@
 package com.lcabrales.simgas.ui.login
 
+import android.text.TextUtils
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.lcabrales.simgas.R
 import com.lcabrales.simgas.base.BaseViewModel
 import com.lcabrales.simgas.data.RemoteApiInterface
 import com.lcabrales.simgas.model.session.LoginRequest
@@ -21,8 +23,10 @@ class LoginViewModel : BaseViewModel() {
     @Inject
     lateinit var remoteApiInterface: RemoteApiInterface
 
-    private val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    private val loginCompletedLiveData: MutableLiveData<User> = MutableLiveData()
+    val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val loginCompletedLiveData: MutableLiveData<User> = MutableLiveData()
+    val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
+    val enableLoginButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -32,6 +36,11 @@ class LoginViewModel : BaseViewModel() {
     }
 
     fun sendLoginRequest(username: String, password: String) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
+            showToastLiveData.value = R.string.login_activity_empty_fields
+            return
+        }
+
         val request = LoginRequest(username, password)
 
         val disposable = remoteApiInterface.login(request)
@@ -47,28 +56,24 @@ class LoginViewModel : BaseViewModel() {
     }
 
     private fun onLoginRequestStart() {
+        enableLoginButtonLiveData.value = false
         showLoadingLiveData.value = true
     }
 
     private fun onLoginRequestFinish() {
+        enableLoginButtonLiveData.value = true
         showLoadingLiveData.value = false
     }
 
     private fun onLoginRequestSuccess(response: LoginResponse) {
         Log.d(TAG, "onLoginRequestSuccess: $response")
 
+        //todo save in database
+
         loginCompletedLiveData.value = response.user
     }
 
     private fun onLoginRequestError() {
 
-    }
-
-    fun getObservableShowLoading(): MutableLiveData<Boolean> {
-        return showLoadingLiveData
-    }
-
-    fun getObservableLoginCompleted(): MutableLiveData<User> {
-        return loginCompletedLiveData
     }
 }

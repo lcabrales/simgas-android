@@ -6,5 +6,6 @@
     <string name="login_activity_password_hint">Password</string>
     <string name="login_activity_button_login">Login</string>
     <string name="login_activity_button_register">New Account</string>
+    <string name="login_activity_empty_fields">Enter your credentials to login</string>
     <!--endregion-->
 </resources>

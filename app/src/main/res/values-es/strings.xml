@@ -5,5 +5,6 @@
     <string name="login_activity_password_hint">Contraseña</string>
     <string name="login_activity_button_login">Iniciar Sesión</string>
     <string name="login_activity_button_register">Nueva Cuenta</string>
+    <string name="login_activity_empty_fields">Introduzca sus credenciales para iniciar sesión</string>
     <!--endregion-->
 </resources>
