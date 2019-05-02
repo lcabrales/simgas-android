@@ -1,10 +1,14 @@
 package com.lcabrales.simgas.model.session
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
-data class User (
+@Entity
+data class User(
+    @field:PrimaryKey
     @Json(name = "UserId")
-    var userId: String? = null,
+    var userId: String,
     @Json(name = "RoleId")
     var roleId: String? = null,
     @Json(name = "Username")

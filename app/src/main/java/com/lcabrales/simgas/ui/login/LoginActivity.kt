@@ -15,7 +15,7 @@ import com.lcabrales.simgas.BaseActivity
 import com.lcabrales.simgas.MainActivity
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityLoginBinding
-import com.lcabrales.simgas.model.session.User
+import com.lcabrales.simgas.di.ViewModelFactory
 
 class LoginActivity : BaseActivity() {
 
@@ -25,18 +25,36 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding.root.visibility = View.GONE
 
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(this))
+            .get(LoginViewModel::class.java)
 
-        setOnClickListeners()
-        setImeOptions()
-        subscribe()
+        verifyLoginStatus()
+    }
+
+    private fun verifyLoginStatus() {
+        viewModel.loadLoginActivityLiveData.observe(this, Observer(this::handleLoadActivity))
+        viewModel.checkForLoggedUser()
+    }
+
+    @UiThread
+    private fun handleLoadActivity(load: Boolean) {
+        if (load) {
+            binding.root.visibility = View.VISIBLE
+
+            setOnClickListeners()
+            setImeOptions()
+            subscribe()
+        } else {
+            completeLogin()
+        }
     }
 
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(this, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(this, Observer(this::showToast))
-        viewModel.loginCompletedLiveData.observe(this, Observer(this::completeLogin))
+        viewModel.loginCompletedLiveData.observe(this, Observer { completeLogin() })
         viewModel.enableLoginButtonLiveData.observe(this, Observer(this::enableLoginButton))
         viewModel.clearUserFieldLiveData.observe(this, Observer(this::clearUserField))
         viewModel.clearPasswordFieldLiveData.observe(this, Observer(this::clearPasswordField))
@@ -96,7 +114,7 @@ class LoginActivity : BaseActivity() {
     }
 
     @UiThread
-    private fun completeLogin(user: User) {
+    private fun completeLogin() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
