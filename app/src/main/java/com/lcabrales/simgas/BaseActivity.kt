@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -17,5 +18,10 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         imm.hideSoftInputFromWindow(view.windowToken, 0)
         view.clearFocus()
+    }
+
+    open fun setupToolbar(toolbar: Toolbar) {
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = title
     }
 }

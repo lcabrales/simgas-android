@@ -7,7 +7,7 @@ import com.lcabrales.simgas.R
 import com.lcabrales.simgas.base.BaseViewModel
 import com.lcabrales.simgas.data.RemoteApiInterface
 import com.lcabrales.simgas.model.session.LoginRequest
-import com.lcabrales.simgas.model.session.LoginResponse
+import com.lcabrales.simgas.model.session.UserResponse
 import com.lcabrales.simgas.model.session.User
 import com.lcabrales.simgas.model.session.UserDao
 import io.reactivex.Observable
@@ -91,7 +91,7 @@ class LoginViewModel(private val userDao: UserDao) : BaseViewModel() {
         showLoadingLiveData.value = false
     }
 
-    private fun onLoginRequestSuccess(response: LoginResponse) {
+    private fun onLoginRequestSuccess(response: UserResponse) {
         Log.d(TAG, "onLoginRequestSuccess: $response")
 
         when {

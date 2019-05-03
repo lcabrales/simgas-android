@@ -14,4 +14,17 @@
     <string name="login_activity_user_does_not_exist">El usuario no existe</string>
     <string name="login_activity_invalid_credentials">Credenciales inválidas. Verifique la contraseña</string>
     <!--endregion-->
+
+    <!--region Register-->
+    <string name="register_activity_title">Nueva Cuenta</string>
+    <string name="register_activity_username_hint">Usuario</string>
+    <string name="register_activity_first_name_hint">Nombre</string>
+    <string name="register_activity_last_name_hint">Apellido</string>
+    <string name="register_activity_email_hint">Correo electrónico</string>
+    <string name="register_activity_password_hint">Contraseña</string>
+    <string name="register_activity_confirm_password_hint">Confirme su contraseña</string>
+    <string name="register_activity_button_register">Crear nueva cuenta</string>
+    <string name="register_activity_empty_fields">Por favor llene todos los campos</string>
+    <string name="register_activity_passwords_do_not_match">Las contraseñas no coinciden</string>
+    <!--endregion-->
 </resources>

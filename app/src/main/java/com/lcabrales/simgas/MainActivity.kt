@@ -18,12 +18,6 @@ class MainActivity : BaseActivity() {
                 .commitNow()
         }
 
-        setupToolbar()
+        setupToolbar(binding.includeAppBar.toolbar)
     }
-
-    private fun setupToolbar() {
-        setSupportActionBar(binding.includeAppBar.toolbar)
-        supportActionBar?.title = title
-    }
-
 }

@@ -16,6 +16,7 @@ import com.lcabrales.simgas.MainActivity
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityLoginBinding
 import com.lcabrales.simgas.di.ViewModelFactory
+import com.lcabrales.simgas.ui.register.RegisterActivity
 
 class LoginActivity : BaseActivity() {
 
@@ -62,6 +63,7 @@ class LoginActivity : BaseActivity() {
 
     private fun setOnClickListeners() {
         binding.btnLogin.setOnClickListener { performLogin() }
+        binding.btnRegister.setOnClickListener { startRegisterActivity() }
     }
 
     private fun setImeOptions() {
@@ -82,6 +84,10 @@ class LoginActivity : BaseActivity() {
         val password = binding.etPassword.text.toString()
 
         viewModel.sendLoginRequest(username, password)
+    }
+
+    private fun startRegisterActivity() {
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 
     @UiThread
