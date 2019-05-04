@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">SIMGAS</string>
 
+    <string name="navigation_drawer_open" translatable="false">Open</string>
+    <string name="navigation_drawer_close" translatable="false">Close</string>
+
     <!--region Common-->
     <string name="network_error">A network error has occurred</string>
     <!--endregion-->
@@ -26,5 +29,14 @@
     <string name="register_activity_button_register">Create a new account</string>
     <string name="register_activity_empty_fields">Please fill out all the fields</string>
     <string name="register_activity_passwords_do_not_match">The passwords do not match</string>
+    <!--endregion-->
+
+    <!--region Main-->
+    <string name="nav_drawer_sensors">Sensors</string>
+    <string name="nav_drawer_profile">My Profile</string>
+    <string name="nav_drawer_workshops">My Workshops</string>
+    <string name="nav_drawer_levels">Reading Levels</string>
+    <string name="nav_drawer_about_us">About Us</string>
+    <string name="nav_drawer_logout">Logout</string>
     <!--endregion-->
 </resources>

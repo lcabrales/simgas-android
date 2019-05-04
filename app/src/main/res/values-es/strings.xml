@@ -27,4 +27,13 @@
     <string name="register_activity_empty_fields">Por favor llene todos los campos</string>
     <string name="register_activity_passwords_do_not_match">Las contraseñas no coinciden</string>
     <!--endregion-->
+
+    <!--region Main-->
+    <string name="nav_drawer_sensors">Sensores</string>
+    <string name="nav_drawer_profile">Mi Perfil</string>
+    <string name="nav_drawer_workshops">Mis Talleres</string>
+    <string name="nav_drawer_levels">Niveles de Lectura</string>
+    <string name="nav_drawer_about_us">Acerca de Nosotros</string>
+    <string name="nav_drawer_logout">Cerrar sesión</string>
+    <!--endregion-->
 </resources>
