@@ -2,6 +2,7 @@ package com.lcabrales.simgas.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.annotation.UiThread
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
@@ -31,9 +32,12 @@ class MainActivity : BaseActivity() {
         setupToolbar(binding.includeAppBar.toolbar)
         setupNavigationDrawer()
         subscribe()
+
+        viewModel.fetchUser()
     }
 
     private fun subscribe() {
+        viewModel.headerLiveData.observe(this, Observer(this::populateNavigationHeader))
         viewModel.logoutCompletedLiveData.observe(this, Observer { completeLogout() })
     }
 
@@ -72,13 +76,8 @@ class MainActivity : BaseActivity() {
             true
         }
 
-        populateNavigationHeader()
         binding.navView.setCheckedItem(R.id.nav_sensors)
         showFragment(SensorsFragment.newInstance())
-    }
-
-    private fun populateNavigationHeader() {
-        //todo implement
     }
 
     private fun showFragment(fragment: Fragment) {
@@ -99,6 +98,13 @@ class MainActivity : BaseActivity() {
 
     private fun logout() {
         viewModel.performUserLogout()
+    }
+
+    @UiThread
+    private fun populateNavigationHeader(fullName: String) {
+        val headerView = binding.navView.getHeaderView(0)
+        val tvTitle = headerView.findViewById<TextView>(R.id.tv_title)
+        tvTitle.text = fullName
     }
 
     @UiThread
