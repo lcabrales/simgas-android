@@ -1,22 +1,40 @@
-package com.lcabrales.simgas
+package com.lcabrales.simgas.ui.main
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.UiThread
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.lcabrales.simgas.BaseActivity
+import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityMainBinding
+import com.lcabrales.simgas.di.ViewModelFactory
+import com.lcabrales.simgas.ui.login.LoginActivity
 import com.lcabrales.simgas.ui.sensors.SensorsFragment
 
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(this))
+            .get(MainViewModel::class.java)
+
         setupToolbar(binding.includeAppBar.toolbar)
         setupNavigationDrawer()
+        subscribe()
+    }
+
+    private fun subscribe() {
+        viewModel.logoutCompletedLiveData.observe(this, Observer { completeLogout() })
     }
 
     private fun setupNavigationDrawer() {
@@ -47,7 +65,7 @@ class MainActivity : BaseActivity() {
                 R.id.nav_about_us -> {
                 }
                 R.id.nav_logout -> {
-                    logout()
+                    showLogoutDialog()
                 }
             }
 
@@ -69,7 +87,23 @@ class MainActivity : BaseActivity() {
             .commitNow()
     }
 
+    private fun showLogoutDialog() {
+        val builder = MaterialAlertDialogBuilder(this)
+        builder.setTitle(R.string.main_activity_logout_confirmation_title)
+        builder.setMessage(R.string.main_activity_logout_confirmation_message)
+        builder.setPositiveButton(
+            R.string.main_activity_logout_confirmation_positive) { _, _ -> logout() }
+        builder.setNegativeButton(R.string.main_activity_logout_confirmation_negative, null)
+        builder.show()
+    }
+
     private fun logout() {
-        //todo logout
+        viewModel.performUserLogout()
+    }
+
+    @UiThread
+    private fun completeLogout() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 }

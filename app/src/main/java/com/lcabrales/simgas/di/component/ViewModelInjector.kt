@@ -2,6 +2,7 @@ package com.lcabrales.simgas.di.component
 
 import com.lcabrales.simgas.di.module.NetworkModule
 import com.lcabrales.simgas.ui.login.LoginViewModel
+import com.lcabrales.simgas.ui.main.MainViewModel
 import com.lcabrales.simgas.ui.register.RegisterViewModel
 import com.lcabrales.simgas.ui.sensors.SensorsViewModel
 import dagger.Component
@@ -19,6 +20,8 @@ interface ViewModelInjector {
     fun inject(loginViewModel: LoginViewModel)
 
     fun inject(registerViewModel: RegisterViewModel)
+
+    fun inject(mainViewModel: MainViewModel)
 
     @Component.Builder
     interface Builder {

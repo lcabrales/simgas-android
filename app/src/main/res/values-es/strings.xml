@@ -35,5 +35,9 @@
     <string name="nav_drawer_levels">Niveles de Lectura</string>
     <string name="nav_drawer_about_us">Acerca de Nosotros</string>
     <string name="nav_drawer_logout">Cerrar sesión</string>
+    <string name="main_activity_logout_confirmation_title">Cerrar sesión</string>
+    <string name="main_activity_logout_confirmation_message">¿Está seguro que desea cerrar sesión?</string>
+    <string name="main_activity_logout_confirmation_positive">Cerrar sesión</string>
+    <string name="main_activity_logout_confirmation_negative">Cancelar</string>
     <!--endregion-->
 </resources>

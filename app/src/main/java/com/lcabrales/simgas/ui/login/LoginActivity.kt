@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.lcabrales.simgas.BaseActivity
-import com.lcabrales.simgas.MainActivity
+import com.lcabrales.simgas.ui.main.MainActivity
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityLoginBinding
 import com.lcabrales.simgas.di.ViewModelFactory

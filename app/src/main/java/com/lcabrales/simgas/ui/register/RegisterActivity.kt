@@ -11,12 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.lcabrales.simgas.BaseBackArrowActivity
-import com.lcabrales.simgas.MainActivity
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityRegisterBinding
 import com.lcabrales.simgas.di.ViewModelFactory
 import com.lcabrales.simgas.model.session.RegisterRequest
 import com.lcabrales.simgas.model.session.Role
+import com.lcabrales.simgas.ui.main.MainActivity
 
 class RegisterActivity : BaseBackArrowActivity() {
 

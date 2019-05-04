@@ -38,5 +38,9 @@
     <string name="nav_drawer_levels">Reading Levels</string>
     <string name="nav_drawer_about_us">About Us</string>
     <string name="nav_drawer_logout">Logout</string>
+    <string name="main_activity_logout_confirmation_title">Logout</string>
+    <string name="main_activity_logout_confirmation_message">Are you sure you want to logout?</string>
+    <string name="main_activity_logout_confirmation_positive">Logout</string>
+    <string name="main_activity_logout_confirmation_negative">Cancel</string>
     <!--endregion-->
 </resources>

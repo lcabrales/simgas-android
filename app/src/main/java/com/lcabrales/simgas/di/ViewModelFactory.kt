@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.lcabrales.simgas.model.database.AppDatabase
 import com.lcabrales.simgas.ui.login.LoginViewModel
+import com.lcabrales.simgas.ui.main.MainViewModel
 import com.lcabrales.simgas.ui.register.RegisterViewModel
 
 class ViewModelFactory(private val activity: AppCompatActivity) : ViewModelProvider.Factory {
@@ -19,6 +20,9 @@ class ViewModelFactory(private val activity: AppCompatActivity) : ViewModelProvi
         } else if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return RegisterViewModel(db.userDao()) as T
+        } else if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return MainViewModel(db.userDao()) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -13,4 +13,7 @@ interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertLoggedUser(vararg posts: User)
+
+    @Query("DELETE FROM user")
+    fun deleteAll()
 }
