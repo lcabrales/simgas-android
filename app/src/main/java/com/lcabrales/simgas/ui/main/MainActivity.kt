@@ -15,6 +15,7 @@ import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityMainBinding
 import com.lcabrales.simgas.di.ViewModelFactory
 import com.lcabrales.simgas.ui.login.LoginActivity
+import com.lcabrales.simgas.ui.profile.ProfileFragment
 import com.lcabrales.simgas.ui.sensors.SensorsFragment
 
 class MainActivity : BaseActivity() {
@@ -58,9 +59,10 @@ class MainActivity : BaseActivity() {
             when (menuItem.itemId) {
 
                 R.id.nav_sensors -> {
-                    showFragment(SensorsFragment.newInstance())
+                    showFragment(SensorsFragment.newInstance(), menuItem.title)
                 }
                 R.id.nav_profile -> {
+                    showFragment(ProfileFragment.newInstance(), menuItem.title)
                 }
                 R.id.nav_workshops -> {
                 }
@@ -76,11 +78,14 @@ class MainActivity : BaseActivity() {
             true
         }
 
-        binding.navView.setCheckedItem(R.id.nav_sensors)
-        showFragment(SensorsFragment.newInstance())
+        val sensorsItem = binding.navView.menu.findItem(R.id.nav_sensors)
+        binding.navView.setCheckedItem(sensorsItem)
+        showFragment(SensorsFragment.newInstance(), sensorsItem.title)
     }
 
-    private fun showFragment(fragment: Fragment) {
+    private fun showFragment(fragment: Fragment, title: CharSequence) {
+        supportActionBar?.title = title
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_container, fragment)
             .commitNow()

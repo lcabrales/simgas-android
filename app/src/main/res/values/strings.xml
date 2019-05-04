@@ -43,4 +43,14 @@
     <string name="main_activity_logout_confirmation_positive">Logout</string>
     <string name="main_activity_logout_confirmation_negative">Cancel</string>
     <!--endregion-->
+
+    <!--region Profile-->
+    <string name="profile_fragment_username_hint">@string/register_activity_username_hint</string>
+    <string name="profile_fragment_first_name_hint">@string/register_activity_first_name_hint</string>
+    <string name="profile_fragment_last_name_hint">@string/register_activity_last_name_hint</string>
+    <string name="profile_fragment_email_hint">@string/register_activity_email_hint</string>
+    <string name="profile_fragment_button_submit">Edit Profile</string>
+    <string name="profile_fragment_empty_fields">@string/register_activity_empty_fields</string>
+    <string name="profile_fragment_edit_success">Your profile has been edited successfully</string>
+    <!--endregion-->
 </resources>

@@ -34,6 +34,7 @@ class MainViewModel(private val userDao: UserDao) : BaseViewModel() {
      * Retrieves the logged user from the database.
      */
     fun fetchUser() {
+        //todo fetch from the server
         val disposable = Observable.fromCallable { userDao.getLoggedUser }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

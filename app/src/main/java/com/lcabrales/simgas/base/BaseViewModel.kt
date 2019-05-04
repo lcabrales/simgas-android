@@ -6,6 +6,7 @@ import com.lcabrales.simgas.di.component.ViewModelInjector
 import com.lcabrales.simgas.di.module.NetworkModule
 import com.lcabrales.simgas.ui.login.LoginViewModel
 import com.lcabrales.simgas.ui.main.MainViewModel
+import com.lcabrales.simgas.ui.profile.ProfileViewModel
 import com.lcabrales.simgas.ui.register.RegisterViewModel
 import com.lcabrales.simgas.ui.sensors.SensorsViewModel
 
@@ -28,6 +29,7 @@ abstract class BaseViewModel : ViewModel() {
             is LoginViewModel -> injector.inject(this)
             is RegisterViewModel -> injector.inject(this)
             is MainViewModel -> injector.inject(this)
+            is ProfileViewModel -> injector.inject(this)
         }
     }
 }
