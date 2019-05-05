@@ -5,6 +5,7 @@ import com.lcabrales.simgas.ui.login.LoginViewModel
 import com.lcabrales.simgas.ui.main.MainViewModel
 import com.lcabrales.simgas.ui.profile.ProfileViewModel
 import com.lcabrales.simgas.ui.register.RegisterViewModel
+import com.lcabrales.simgas.ui.sensordetail.SensorDetailViewModel
 import com.lcabrales.simgas.ui.sensors.SensorsViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -21,6 +22,7 @@ interface ViewModelInjector {
     fun inject(registerViewModel: RegisterViewModel)
     fun inject(mainViewModel: MainViewModel)
     fun inject(profileViewModel: ProfileViewModel)
+    fun inject(sensorDetailViewModel: SensorDetailViewModel)
 
     @Component.Builder
     interface Builder {

@@ -50,4 +50,12 @@
     <string name="profile_fragment_empty_fields">@string/register_activity_empty_fields</string>
     <string name="profile_fragment_edit_success">Su perfil ha sido actualizado con éxito</string>
     <!--endregion-->
+
+    <!--region SensorDetail-->
+    <string name="sensor_detail_activity_description">Descripción</string>
+    <string name="sensor_detail_activity_daily_average">Promedio Diario</string>
+    <string name="sensor_detail_activity_last_readings">Últimas Lecturas</string>
+    <string name="sensor_detail_activity_view_all">Ver Todas</string>
+    <string name="sensor_detail_activity_chart_no_data">No hay datos para mostrar</string>
+    <!--endregion-->
 </resources>

@@ -53,4 +53,12 @@
     <string name="profile_fragment_empty_fields">@string/register_activity_empty_fields</string>
     <string name="profile_fragment_edit_success">Your profile has been edited successfully</string>
     <!--endregion-->
+
+    <!--region SensorDetail-->
+    <string name="sensor_detail_activity_description">Description</string>
+    <string name="sensor_detail_activity_daily_average">Daily Average</string>
+    <string name="sensor_detail_activity_last_readings">Last Readings</string>
+    <string name="sensor_detail_activity_view_all">View All</string>
+    <string name="sensor_detail_activity_chart_no_data">There is no data to display</string>
+    <!--endregion-->
 </resources>

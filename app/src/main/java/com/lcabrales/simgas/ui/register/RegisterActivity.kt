@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -75,11 +73,6 @@ class RegisterActivity : BaseBackArrowActivity() {
     @UiThread
     private fun showLoading(show: Boolean) {
         binding.pbLoading.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    @UiThread
-    private fun showToast(@StringRes stringRes: Int) {
-        Toast.makeText(this, getString(stringRes), Toast.LENGTH_SHORT).show()
     }
 
     @UiThread

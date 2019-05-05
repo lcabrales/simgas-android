@@ -1,15 +1,13 @@
 package com.lcabrales.simgas.data
 
+import com.lcabrales.simgas.model.readings.daily.DailyAverageReadingResponse
 import com.lcabrales.simgas.model.sensors.GetSensorsResponse
 import com.lcabrales.simgas.model.session.EditUserRequest
 import com.lcabrales.simgas.model.session.LoginRequest
 import com.lcabrales.simgas.model.session.RegisterRequest
 import com.lcabrales.simgas.model.session.UserResponse
 import io.reactivex.Observable
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 /**
  * The interface which provides methods to get result of webservices
@@ -39,4 +37,16 @@ interface RemoteApiInterface {
      */
     @GET("/Sensor")
     fun getSensors(): Observable<GetSensorsResponse>
+
+    /**
+     * Get a specific sensor from the remote API.
+     */
+    @GET("/Sensor?")
+    fun getSensorDetail(@Query("SensorId") sensorId: String): Observable<GetSensorsResponse>
+
+    /**
+     * Get the daily average readings for a specific sensor.
+     */
+    @GET("/SensorReading/Daily/SensorId/{SensorId}")
+    fun getSensorDailyAverageReading(@Path("SensorId") sensorId: String): Observable<DailyAverageReadingResponse>
 }

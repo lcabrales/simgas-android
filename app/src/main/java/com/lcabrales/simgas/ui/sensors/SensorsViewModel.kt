@@ -20,8 +20,8 @@ class SensorsViewModel : BaseViewModel() {
     @Inject
     lateinit var remoteApiInterface: RemoteApiInterface
 
-    private val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
-    private val sendSensorsDataLiveData: MutableLiveData<List<Sensor>> = MutableLiveData()
+    val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val sendSensorsDataLiveData: MutableLiveData<List<Sensor>> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -38,38 +38,30 @@ class SensorsViewModel : BaseViewModel() {
         val disposable = remoteApiInterface.getSensors()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { onRetrievePostListStart() }
-                .doOnTerminate { onRetrievePostListFinish() }
+                .doOnSubscribe { onRetrieveSensorListStart() }
+                .doOnTerminate { onRetrieveSensorListFinish() }
                 .subscribe(
-                        { response -> onRetrievePostListSuccess(response) },
-                        { onRetrievePostListError() }
+                        { response -> onRetrieveSensorListSuccess(response) },
+                        { onRetrieveSensorListError() }
                 )
         disposables.add(disposable)
     }
 
-    private fun onRetrievePostListStart() {
+    private fun onRetrieveSensorListStart() {
         showLoadingLiveData.value = true
     }
 
-    private fun onRetrievePostListFinish() {
+    private fun onRetrieveSensorListFinish() {
         showLoadingLiveData.value = false
     }
 
-    private fun onRetrievePostListSuccess(response: GetSensorsResponse) {
-        Log.d(TAG, "onRetrievePostListSuccess: $response")
+    private fun onRetrieveSensorListSuccess(response: GetSensorsResponse) {
+        Log.d(TAG, "onRetrieveSensorListSuccess: $response")
 
         sendSensorsDataLiveData.value = response.data
     }
 
-    private fun onRetrievePostListError() {
+    private fun onRetrieveSensorListError() {
 
-    }
-
-    fun getObservableShowLoading(): MutableLiveData<Boolean> {
-        return showLoadingLiveData
-    }
-
-    fun getObservableSensorData(): MutableLiveData<List<Sensor>> {
-        return sendSensorsDataLiveData
     }
 }

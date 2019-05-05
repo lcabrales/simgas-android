@@ -3,6 +3,9 @@ package com.lcabrales.simgas
 import android.app.Activity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
@@ -23,5 +26,10 @@ abstract class BaseActivity : AppCompatActivity() {
     open fun setupToolbar(toolbar: Toolbar) {
         setSupportActionBar(toolbar)
         supportActionBar?.title = title
+    }
+
+    @UiThread
+    fun showToast(@StringRes stringRes: Int) {
+        Toast.makeText(this, getString(stringRes), Toast.LENGTH_SHORT).show()
     }
 }

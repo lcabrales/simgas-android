@@ -4,18 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
-import android.widget.Toast.LENGTH_SHORT
-import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.lcabrales.simgas.BaseActivity
-import com.lcabrales.simgas.ui.main.MainActivity
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityLoginBinding
 import com.lcabrales.simgas.di.ViewModelFactory
+import com.lcabrales.simgas.ui.main.MainActivity
 import com.lcabrales.simgas.ui.register.RegisterActivity
 
 class LoginActivity : BaseActivity() {
@@ -93,11 +90,6 @@ class LoginActivity : BaseActivity() {
     @UiThread
     private fun showLoading(show: Boolean) {
         binding.pbLoading.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    @UiThread
-    private fun showToast(@StringRes stringRes: Int) {
-        Toast.makeText(this, getString(stringRes), LENGTH_SHORT).show()
     }
 
     @UiThread

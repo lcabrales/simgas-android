@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.databinding.ItemSensorBinding
 import com.lcabrales.simgas.model.sensors.Sensor
+import com.lcabrales.simgas.ui.sensors.SensorsFragmentInterface
 
-class SensorsAdapter(private val dataset: List<Sensor>) :
+class SensorsAdapter(private val dataset: List<Sensor>, private val fragmentInterface: SensorsFragmentInterface) :
     RecyclerView.Adapter<SensorItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SensorItemViewHolder {
@@ -37,6 +38,8 @@ class SensorsAdapter(private val dataset: List<Sensor>) :
 
         val airQualityColor = Color.parseColor(item.lastSensorReading?.airQuality?.primaryColor)
         holder.getBinding().pbLastReading.progressTintList = ColorStateList.valueOf(airQualityColor)
+
+        holder.getBinding().root.setOnClickListener { fragmentInterface.showSensorDetail(item) }
     }
 
     private fun getItem(position: Int): Sensor {
