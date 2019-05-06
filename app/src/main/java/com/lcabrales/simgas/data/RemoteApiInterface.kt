@@ -48,5 +48,7 @@ interface RemoteApiInterface {
      * Get the daily average readings for a specific sensor.
      */
     @GET("/SensorReading/Daily/SensorId/{SensorId}")
-    fun getSensorDailyAverageReading(@Path("SensorId") sensorId: String): Observable<DailyAverageReadingResponse>
+    fun getSensorDailyAverageReading(@Path("SensorId") sensorId: String, @Query(
+        "StartDate") startDate: String): Observable<DailyAverageReadingResponse>
+
 }

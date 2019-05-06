@@ -8,6 +8,7 @@ import java.util.*
 object Dates {
 
     const val SERVER_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+    const val SERVER_FORMAT_SHORT = "yyyy-MM-dd"
     const val DISPLAY_FORMAT_LONG_DATE = "MMM dd, yyyy"
     const val DISPLAY_FORMAT_SHORT_DATE = "dd/MM/yyyy"
     const val DISPLAY_FORMAT_SHORT_DATE_DAILY = "dd-MMM"

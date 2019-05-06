@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.base.BaseViewModel
+import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.data.RemoteApiInterface
 import com.lcabrales.simgas.model.readings.daily.DailyAverage
 import com.lcabrales.simgas.model.readings.daily.DailyAverageReadingResponse
@@ -12,6 +13,7 @@ import com.lcabrales.simgas.model.sensors.Sensor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 class SensorDetailViewModel : BaseViewModel() {
@@ -71,7 +73,11 @@ class SensorDetailViewModel : BaseViewModel() {
 
     //region Sensor
     private fun fetchDailyAverages(sensorId: String) {
-        val disposable = remoteApiInterface.getSensorDailyAverageReading(sensorId)
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_MONTH, -30)
+        val dateString = Dates.getFormattedDateString(calendar.timeInMillis, Dates.SERVER_FORMAT_SHORT)
+
+        val disposable = remoteApiInterface.getSensorDailyAverageReading(sensorId, dateString)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnTerminate { onRetrieveDataFinish() }
