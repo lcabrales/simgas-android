@@ -2,6 +2,7 @@ package com.lcabrales.simgas.ui.sensors
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.lcabrales.simgas.R
 import com.lcabrales.simgas.base.BaseViewModel
 import com.lcabrales.simgas.data.RemoteApiInterface
 import com.lcabrales.simgas.model.sensors.GetSensorsResponse
@@ -21,6 +22,7 @@ class SensorsViewModel : BaseViewModel() {
     lateinit var remoteApiInterface: RemoteApiInterface
 
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
     val sendSensorsDataLiveData: MutableLiveData<List<Sensor>> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -62,6 +64,6 @@ class SensorsViewModel : BaseViewModel() {
     }
 
     private fun onRetrieveSensorListError() {
-
+        showToastLiveData.value = R.string.network_error
     }
 }

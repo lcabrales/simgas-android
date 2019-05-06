@@ -1,5 +1,6 @@
 package com.lcabrales.simgas.data
 
+import com.lcabrales.simgas.model.readings.GetSensorReadingsResponse
 import com.lcabrales.simgas.model.readings.daily.DailyAverageReadingResponse
 import com.lcabrales.simgas.model.sensors.GetSensorsResponse
 import com.lcabrales.simgas.model.session.EditUserRequest
@@ -51,4 +52,10 @@ interface RemoteApiInterface {
     fun getSensorDailyAverageReading(@Path("SensorId") sensorId: String, @Query(
         "StartDate") startDate: String): Observable<DailyAverageReadingResponse>
 
+    /**
+     * Get the latest readings for a specific sensor.
+     */
+    @GET("/SensorReading/SensorId/{SensorId}")
+    fun getLatestSensorReadings(@Path("SensorId") sensorId: String, @Query(
+        "StartDate") startDate: String): Observable<GetSensorReadingsResponse>
 }

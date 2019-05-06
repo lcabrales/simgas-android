@@ -9,6 +9,7 @@ import androidx.annotation.UiThread
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcabrales.simgas.BaseFragment
 import com.lcabrales.simgas.R
@@ -43,6 +44,7 @@ class SensorsFragment : BaseFragment(), SensorsFragmentInterface {
 
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer(this::showLoading))
+        viewModel.showToastLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
         viewModel.sendSensorsDataLiveData.observe(viewLifecycleOwner,
             Observer(this::updateSensorsListUi))
     }
@@ -50,6 +52,8 @@ class SensorsFragment : BaseFragment(), SensorsFragmentInterface {
     private fun setupRecycler() {
         val layoutManager = LinearLayoutManager(context)
         binding.rvSensors.layoutManager = layoutManager
+        binding.rvSensors.addItemDecoration(
+            DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         binding.rvSensors.isNestedScrollingEnabled = false
     }
 

@@ -54,8 +54,11 @@
     <!--region SensorDetail-->
     <string name="sensor_detail_activity_description">Descripción</string>
     <string name="sensor_detail_activity_daily_average">Promedio Diario</string>
-    <string name="sensor_detail_activity_last_readings">Últimas Lecturas</string>
-    <string name="sensor_detail_activity_view_all">Ver Todas</string>
+    <string name="sensor_detail_activity_view_last_readings">Ver Últimas Lecturas</string>
     <string name="sensor_detail_activity_chart_no_data">No hay datos para mostrar</string>
+    <!--endregion-->
+
+    <!--region LastReadings-->
+    <string name="last_readings_activity_title">Lecturas de los últimos 7 días</string>
     <!--endregion-->
 </resources>

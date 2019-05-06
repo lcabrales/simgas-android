@@ -1,5 +1,6 @@
 package com.lcabrales.simgas.ui.sensordetail
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -19,8 +20,7 @@ import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.databinding.ActivitySensorDetailBinding
 import com.lcabrales.simgas.model.readings.daily.DailyAverage
 import com.lcabrales.simgas.model.sensors.Sensor
-
-
+import com.lcabrales.simgas.ui.sensorreadings.SensorReadingsActivity
 
 class SensorDetailActivity : BaseBackArrowActivity() {
 
@@ -40,6 +40,7 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         viewModel = ViewModelProviders.of(this).get(SensorDetailViewModel::class.java)
 
         setupToolbar(binding.includeAppBar.toolbar)
+        setOnClickListeners()
         subscribe()
 
         val sensorId = intent.getStringExtra(EXTRA_SENSOR_ID)
@@ -60,6 +61,10 @@ class SensorDetailActivity : BaseBackArrowActivity() {
 
         toolbar.title = intent.getStringExtra(EXTRA_TITLE)
         toolbar.subtitle = intent.getStringExtra(EXTRA_SUBTITLE)
+    }
+
+    private fun setOnClickListeners() {
+        binding.btnViewLastReadings.setOnClickListener { showLastReadingsActivity() }
     }
 
     @UiThread
@@ -105,5 +110,15 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         binding.lineChart.setNoDataText(getString(R.string.sensor_detail_activity_chart_no_data))
 
         binding.lineChart.invalidate()
+    }
+
+    private fun showLastReadingsActivity() {
+        val intent = Intent(this, SensorReadingsActivity::class.java)
+        intent.putExtra(SensorReadingsActivity.EXTRA_SENSOR_ID,
+            this.intent.getStringExtra(EXTRA_SENSOR_ID))
+        intent.putExtra(SensorReadingsActivity.EXTRA_TITLE, this.intent.getStringExtra(EXTRA_TITLE))
+        intent.putExtra(SensorReadingsActivity.EXTRA_SUBTITLE,
+            this.intent.getStringExtra(EXTRA_SUBTITLE))
+        startActivity(intent)
     }
 }

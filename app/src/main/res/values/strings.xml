@@ -57,8 +57,11 @@
     <!--region SensorDetail-->
     <string name="sensor_detail_activity_description">Description</string>
     <string name="sensor_detail_activity_daily_average">Daily Average</string>
-    <string name="sensor_detail_activity_last_readings">Last Readings</string>
-    <string name="sensor_detail_activity_view_all">View All</string>
+    <string name="sensor_detail_activity_view_last_readings">View Last Readings</string>
     <string name="sensor_detail_activity_chart_no_data">There is no data to display</string>
+    <!--endregion-->
+
+    <!--region LastReadings-->
+    <string name="last_readings_activity_title">Readings of the past 7 days</string>
     <!--endregion-->
 </resources>
