@@ -41,6 +41,7 @@ class SensorDetailActivity : BaseBackArrowActivity() {
 
         setupToolbar(binding.includeAppBar.toolbar)
         setOnClickListeners()
+        setupChart()
         subscribe()
 
         val sensorId = intent.getStringExtra(EXTRA_SENSOR_ID)
@@ -67,6 +68,15 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         binding.btnViewLastReadings.setOnClickListener { showLastReadingsActivity() }
     }
 
+    private fun setupChart() {
+        binding.lineChart.xAxis.valueFormatter = DateValueFormatter()
+        binding.lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        binding.lineChart.legend.isEnabled = false
+        binding.lineChart.description.isEnabled = false
+        binding.lineChart.setNoDataTextColor(ContextCompat.getColor(this, R.color.color_primary))
+        binding.lineChart.setNoDataText(getString(R.string.sensor_detail_activity_chart_no_data))
+    }
+
     @UiThread
     private fun showLoading(show: Boolean) {
         binding.pbLoading.visibility = if (show) View.VISIBLE else View.GONE
@@ -84,15 +94,17 @@ class SensorDetailActivity : BaseBackArrowActivity() {
 
     @UiThread
     private fun populateDailyAverageData(list: List<DailyAverage>) {
+        if (list.isNullOrEmpty()) {
+            binding.lineChart.clear()
+            return
+        }
+
         val chartEntries = ArrayList<Entry>()
 
         list.forEach {
             val timeStamp = Dates.getFormattedDate(it.createdDate, Dates.SERVER_FORMAT).time
             chartEntries.add(Entry(timeStamp.toFloat(), it.gasPpm!!.toFloat()))
         }
-
-        binding.lineChart.xAxis.valueFormatter = DateValueFormatter()
-        binding.lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
 
         val dataSet = LineDataSet(chartEntries, intent.getStringExtra(EXTRA_TITLE))
         dataSet.valueTextSize = 14F
@@ -104,10 +116,6 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         val lineData = LineData(dataSet)
 
         binding.lineChart.data = lineData
-        binding.lineChart.legend.isEnabled = false
-        binding.lineChart.description.isEnabled = false
-        binding.lineChart.setNoDataTextColor(ContextCompat.getColor(this, R.color.color_primary))
-        binding.lineChart.setNoDataText(getString(R.string.sensor_detail_activity_chart_no_data))
 
         binding.lineChart.invalidate()
     }
