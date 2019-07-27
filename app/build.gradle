@@ -15,10 +15,10 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", baseUrlDev
+            buildConfigField "String", "BASE_URL", baseUrlProd
         }
         release {
-            buildConfigField "String", "BASE_URL", baseUrlDev
+            buildConfigField "String", "BASE_URL", baseUrlProd
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
