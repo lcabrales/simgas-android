@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.lcabrales.simgas.R
 import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.databinding.ItemSensorReadingBinding
 import com.lcabrales.simgas.model.readings.SensorReading
@@ -25,7 +26,10 @@ class SensorReadingsAdapter(private val dataset: List<SensorReading>) :
     override fun onBindViewHolder(holder: SensorReadingItemViewHolder, position: Int) {
         val item = getItem(position)
 
-        holder.getBinding().tvValue.text = item.gasPpm.toString()
+        val context = holder.getBinding().tvValue.context
+
+        holder.getBinding().tvValue.text = context.getString(R.string.ppm_value,
+            item.gasPpm)
 
         val date = Dates.getFormattedDate(item.createdDate, Dates.SERVER_FORMAT)
         holder.getBinding().tvDate.text = Dates.getRelativeTimeString(date.time)

@@ -5,12 +5,14 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.lcabrales.simgas.R
 import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.databinding.ItemSensorBinding
 import com.lcabrales.simgas.model.sensors.Sensor
 import com.lcabrales.simgas.ui.sensors.SensorsFragmentInterface
 
-class SensorsAdapter(private val dataset: List<Sensor>, private val fragmentInterface: SensorsFragmentInterface) :
+class SensorsAdapter(private val dataset: List<Sensor>,
+                     private val fragmentInterface: SensorsFragmentInterface) :
     RecyclerView.Adapter<SensorItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SensorItemViewHolder {
@@ -26,9 +28,12 @@ class SensorsAdapter(private val dataset: List<Sensor>, private val fragmentInte
     override fun onBindViewHolder(holder: SensorItemViewHolder, position: Int) {
         val item = getItem(position)
 
+        val context = holder.getBinding().tvTitle.context
+
         holder.getBinding().tvTitle.text = item.name
         holder.getBinding().tvSubtitle.text = item.gas?.name
-        holder.getBinding().tvLastReading.text = item.lastSensorReading?.gasPpm.toString()
+        holder.getBinding().tvLastReading.text = context.getString(
+            R.string.ppm_value, item.lastSensorReading?.gasPpm)
 
         val date = Dates.getFormattedDate(item.lastSensorReading?.createdDate, Dates.SERVER_FORMAT)
         holder.getBinding().tvLastReadingDate.text = Dates.getRelativeTimeString(date.time)
