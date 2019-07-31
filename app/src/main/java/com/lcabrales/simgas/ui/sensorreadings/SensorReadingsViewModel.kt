@@ -26,6 +26,8 @@ class SensorReadingsViewModel : BaseViewModel() {
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
     val sendSensorReadingsLiveData: MutableLiveData<List<SensorReading>> = MutableLiveData()
+    val showRecyclerViewLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val showEmptyViewLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -62,6 +64,10 @@ class SensorReadingsViewModel : BaseViewModel() {
 
     private fun onRetrieveSensorReadingsSuccess(response: GetSensorReadingsResponse) {
         Log.d(TAG, "onRetrieveSensorReadingsSuccess: $response")
+
+        val isEmpty = response.data.isNullOrEmpty()
+        showEmptyViewLiveData.value = isEmpty
+        showRecyclerViewLiveData.value = !isEmpty
 
         sendSensorReadingsLiveData.value = response.data
     }

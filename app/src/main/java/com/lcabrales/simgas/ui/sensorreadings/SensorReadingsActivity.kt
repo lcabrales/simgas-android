@@ -45,6 +45,8 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
         viewModel.showLoadingLiveData.observe(this, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(this, Observer(this::showToast))
         viewModel.sendSensorReadingsLiveData.observe(this, Observer(this::updateSensorsListUi))
+        viewModel.showEmptyViewLiveData.observe(this, Observer(this::showEmptyView))
+        viewModel.showRecyclerViewLiveData.observe(this, Observer(this::showRecyclerView))
     }
 
     override fun setupToolbar(toolbar: Toolbar) {
@@ -65,6 +67,16 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
     @UiThread
     private fun showLoading(show: Boolean) {
         binding.pbLoading.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    @UiThread
+    private fun showEmptyView(show: Boolean) {
+        binding.tvEmptyView.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    @UiThread
+    private fun showRecyclerView(show: Boolean) {
+        binding.rvLastReadings.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     @UiThread

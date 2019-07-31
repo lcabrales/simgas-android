@@ -63,5 +63,6 @@
 
     <!--region LastReadings-->
     <string name="last_readings_activity_title">Readings of the past 7 days</string>
+    <string name="last_readings_activity_empty_text">There is no data to display</string>
     <!--endregion-->
 </resources>
