@@ -4,6 +4,7 @@
     <!--region Common-->
     <string name="network_error">Ha ocurrido un error de conexión</string>
     <string name="ppm_value">%d ppm</string>
+    <string name="empty_text">No hay datos para mostrar</string>
     <!--endregion-->
 
     <!--region Login-->
@@ -56,11 +57,17 @@
     <string name="sensor_detail_activity_description">Descripción</string>
     <string name="sensor_detail_activity_daily_average">Promedio Diario</string>
     <string name="sensor_detail_activity_view_last_readings">Ver Últimas Lecturas</string>
-    <string name="sensor_detail_activity_chart_no_data">No hay datos para mostrar</string>
+    <string name="sensor_detail_activity_chart_no_data">@string/empty_text</string>
     <!--endregion-->
 
     <!--region LastReadings-->
     <string name="last_readings_activity_title">Lecturas de los últimos 7 días</string>
-    <string name="last_readings_activity_empty_text">No hay datos para mostrar</string>
+    <string name="last_readings_activity_empty_text">@string/empty_text</string>
+    <!--endregion-->
+
+    <!--region ReadingLevels-->
+    <string name="reading_levels_fragment_today">Hoy</string>
+    <string name="reading_levels_fragment_daily_average">Daily Average</string>
+    <string name="reading_levels_fragment_chart_no_data">@string/empty_text</string>
     <!--endregion-->
 </resources>

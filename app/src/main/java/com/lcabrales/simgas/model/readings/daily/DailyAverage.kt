@@ -8,6 +8,8 @@ data class DailyAverage(
     var createdDate: String? = null,
     @Json(name = "GasPpm")
     var gasPpm: Double? = null,
+    @Json(name = "GasPercentage")
+    var gasPercentage: Double? = null,
     @Json(name = "AirQuality")
     var airQuality: AirQuality? = null
 )

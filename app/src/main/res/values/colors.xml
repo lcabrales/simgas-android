@@ -18,4 +18,27 @@
     <color name="black">#000000</color>
     <color name="gray_text">#666666</color>
     <color name="red">#A00000</color>
+
+    <!--region Chart-->
+    <color name="chart_indigo">#003f5c</color>
+    <color name="chart_blue">#2f4b7c</color>
+    <color name="chart_purple">#665191</color>
+    <color name="chart_lilac">#a05195</color>
+    <color name="chart_violet">#d45087</color>
+    <color name="chart_magenta">#f95d6a</color>
+    <color name="chart_orange">#ff7c43</color>
+    <color name="chart_yellow">#ffa600</color>
+
+    <array name="chart_colors">
+        <!--todo dynamic array in kotlin code depending on the number of data sets-->
+        <item>@color/chart_indigo</item>
+        <!--<item>@color/chart_blue</item>-->
+        <!--<item>@color/chart_purple</item>-->
+        <!--<item>@color/chart_lilac</item>-->
+        <item>@color/chart_violet</item>
+        <!--<item>@color/chart_magenta</item>-->
+        <!--<item>@color/chart_orange</item>-->
+        <item>@color/chart_yellow</item>
+    </array>
+    <!--endregion-->
 </resources>

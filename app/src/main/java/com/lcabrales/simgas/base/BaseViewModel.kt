@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.lcabrales.simgas.di.component.DaggerViewModelInjector
 import com.lcabrales.simgas.di.component.ViewModelInjector
 import com.lcabrales.simgas.di.module.NetworkModule
+import com.lcabrales.simgas.ui.readinglevels.ReadingLevelsViewModel
 import com.lcabrales.simgas.ui.login.LoginViewModel
 import com.lcabrales.simgas.ui.main.MainViewModel
 import com.lcabrales.simgas.ui.profile.ProfileViewModel
@@ -34,6 +35,7 @@ abstract class BaseViewModel : ViewModel() {
             is ProfileViewModel -> injector.inject(this)
             is SensorDetailViewModel -> injector.inject(this)
             is SensorReadingsViewModel -> injector.inject(this)
+            is ReadingLevelsViewModel -> injector.inject(this)
         }
     }
 }

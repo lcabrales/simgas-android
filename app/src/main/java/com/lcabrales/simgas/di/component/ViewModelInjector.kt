@@ -1,6 +1,7 @@
 package com.lcabrales.simgas.di.component
 
 import com.lcabrales.simgas.di.module.NetworkModule
+import com.lcabrales.simgas.ui.readinglevels.ReadingLevelsViewModel
 import com.lcabrales.simgas.ui.login.LoginViewModel
 import com.lcabrales.simgas.ui.main.MainViewModel
 import com.lcabrales.simgas.ui.profile.ProfileViewModel
@@ -25,6 +26,7 @@ interface ViewModelInjector {
     fun inject(profileViewModel: ProfileViewModel)
     fun inject(sensorDetailViewModel: SensorDetailViewModel)
     fun inject(sensorReadingsViewModel: SensorReadingsViewModel)
+    fun inject(readingLevelsViewModel: ReadingLevelsViewModel)
 
     @Component.Builder
     interface Builder {

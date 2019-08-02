@@ -14,6 +14,7 @@ import com.lcabrales.simgas.BaseActivity
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.databinding.ActivityMainBinding
 import com.lcabrales.simgas.di.ViewModelFactory
+import com.lcabrales.simgas.ui.readinglevels.ReadingLevelsFragment
 import com.lcabrales.simgas.ui.login.LoginActivity
 import com.lcabrales.simgas.ui.profile.ProfileFragment
 import com.lcabrales.simgas.ui.sensors.SensorsFragment
@@ -67,6 +68,7 @@ class MainActivity : BaseActivity() {
                 R.id.nav_workshops -> {
                 }
                 R.id.nav_levels -> {
+                    showFragment(ReadingLevelsFragment.newInstance(), menuItem.title)
                 }
                 R.id.nav_about_us -> {
                 }

@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 
 data class DailyAverageReadingResponse(
     @Json(name = "Data")
-    var data: DailyAverageReading? = null,
+    var data: SensorDailyAverage? = null,
     @Json(name = "Result")
     var result: Result? = null
 )
