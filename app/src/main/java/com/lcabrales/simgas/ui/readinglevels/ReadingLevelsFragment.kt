@@ -11,7 +11,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.lcabrales.simgas.BaseFragment
 import com.lcabrales.simgas.R
@@ -41,7 +43,6 @@ class ReadingLevelsFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ReadingLevelsViewModel::class.java)
 
-        setupPieChart()
         setupLineChart()
         subscribe()
     }
@@ -49,19 +50,7 @@ class ReadingLevelsFragment : BaseFragment() {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
-        viewModel.sendDailyAverageListLiveData.observe(viewLifecycleOwner, Observer(this::populateChartData))
-    }
-
-    private fun setupPieChart() {
-        val holeRadius = 40f
-        binding.pieChart.setDrawEntryLabels(false)
-        binding.pieChart.legend.isEnabled = true
-        binding.pieChart.description.isEnabled = false
-        binding.pieChart.holeRadius = holeRadius
-        binding.pieChart.transparentCircleRadius = holeRadius + 5f
-        binding.pieChart.setNoDataTextColor(
-            ContextCompat.getColor(context!!, R.color.color_primary))
-        binding.pieChart.setNoDataText(getString(R.string.reading_levels_fragment_chart_no_data))
+        viewModel.sendDailyAverageListLiveData.observe(viewLifecycleOwner, Observer(this::populateDailyAverageData))
     }
 
     private fun setupLineChart() {
@@ -77,33 +66,6 @@ class ReadingLevelsFragment : BaseFragment() {
     @UiThread
     private fun showLoading(show: Boolean) {
         binding.pbLoading.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    @UiThread
-    private fun populateChartData(list: List<SensorDailyAverage>) {
-        populateTodayData(list)
-        populateDailyAverageData(list)
-    }
-
-    @UiThread
-    private fun populateTodayData(list: List<SensorDailyAverage>) {
-        val pieChartEntries = ArrayList<PieEntry>()
-        val chartColors = Utils.getChartColors(context!!, list.size)
-
-        list.forEach {
-            pieChartEntries.add(PieEntry(it.dailyAverages!!.last().gasPercentage!!.toFloat() * 100, it.sensor!!.name))
-        }
-
-        val dataSet = PieDataSet(pieChartEntries, "")
-        dataSet.valueTextSize = 14f
-        dataSet.valueTextColor = Color.WHITE
-        dataSet.colors = chartColors
-        dataSet.valueFormatter = PercentFormatter()
-
-        val data = PieData(dataSet)
-        binding.pieChart.data = data
-
-        binding.pieChart.invalidate()
     }
 
     @UiThread
