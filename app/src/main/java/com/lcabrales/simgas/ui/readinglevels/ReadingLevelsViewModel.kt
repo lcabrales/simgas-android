@@ -83,7 +83,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
     //endregion
 
     //region Daily Averages
-     fun setSelectedFilter(filter: DaysAgoFilter){
+    fun setSelectedFilter(filter: DaysAgoFilter) {
         selectedDaysFilter = filter
         loadSensors()
     }

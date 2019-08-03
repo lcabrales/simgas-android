@@ -6,6 +6,7 @@ import com.lcabrales.simgas.R
 import com.lcabrales.simgas.base.BaseViewModel
 import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.data.RemoteApiInterface
+import com.lcabrales.simgas.model.filter.DaysAgoFilter
 import com.lcabrales.simgas.model.readings.daily.DailyAverage
 import com.lcabrales.simgas.model.readings.daily.DailyAverageReadingResponse
 import com.lcabrales.simgas.model.sensors.GetSensorsResponse
@@ -34,6 +35,8 @@ class SensorDetailViewModel : BaseViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
     private var webCount = 0
     private var webCompleted = 0
+    private lateinit var sensorId: String
+    private lateinit var selectedDaysFilter: DaysAgoFilter
 
     override fun onCleared() {
         super.onCleared()
@@ -44,9 +47,9 @@ class SensorDetailViewModel : BaseViewModel() {
         showLoadingLiveData.value = true
         showContentsLiveData.value = false
 
+        this.sensorId = sensorId
+
         fetchSensor(sensorId)
-        webCount++
-        fetchDailyAverages(sensorId)
         webCount++
     }
 
@@ -72,10 +75,18 @@ class SensorDetailViewModel : BaseViewModel() {
     //endregion
 
     //region Sensor
+    fun setSelectedFilter(filter: DaysAgoFilter) {
+        selectedDaysFilter = filter
+
+        fetchDailyAverages(sensorId)
+        webCount++
+    }
+
     private fun fetchDailyAverages(sensorId: String) {
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_MONTH, -30)
-        val dateString = Dates.getFormattedDateString(calendar.timeInMillis, Dates.SERVER_FORMAT_SHORT)
+        calendar.add(Calendar.DAY_OF_YEAR, -selectedDaysFilter.numberOfDaysAgo)
+        val dateString = Dates.getFormattedDateString(calendar.timeInMillis,
+            Dates.SERVER_FORMAT_SHORT)
 
         val disposable = remoteApiInterface.getSensorDailyAverageReading(sensorId, dateString)
             .subscribeOn(Schedulers.io())

@@ -65,10 +65,20 @@
                     style="@style/ItemTextViewTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:text="@string/sensor_detail_activity_daily_average"
+                    app:layout_constraintBottom_toBottomOf="@id/sp_days_filter"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/sp_days_filter"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/sp_days_filter" />
+
+                <Spinner
+                    android:id="@+id/sp_days_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_daily_average"
                     app:layout_constraintTop_toBottomOf="@id/tv_description_value" />
 
                 <com.github.mikephil.charting.charts.LineChart

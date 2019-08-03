@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.annotation.UiThread
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -18,6 +20,7 @@ import com.lcabrales.simgas.BaseBackArrowActivity
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.databinding.ActivitySensorDetailBinding
+import com.lcabrales.simgas.model.filter.DaysAgoFilter
 import com.lcabrales.simgas.model.readings.daily.DailyAverage
 import com.lcabrales.simgas.model.sensors.Sensor
 import com.lcabrales.simgas.ui.sensorreadings.SensorReadingsActivity
@@ -42,6 +45,7 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         setupToolbar(binding.includeAppBar.toolbar)
         setOnClickListeners()
         setupChart()
+        setupDaysAgoFilter()
         subscribe()
 
         val sensorId = intent.getStringExtra(EXTRA_SENSOR_ID)
@@ -77,6 +81,22 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         binding.lineChart.setNoDataText(getString(R.string.sensor_detail_activity_chart_no_data))
     }
 
+    private fun setupDaysAgoFilter() {
+        val filters = DaysAgoFilter.getDefaultFilters(this)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, filters)
+        binding.spDaysFilter.adapter = adapter
+        binding.spDaysFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int,
+                                        id: Long) {
+                viewModel.setSelectedFilter(filters[position])
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+    }
+
     @UiThread
     private fun showLoading(show: Boolean) {
         binding.pbLoading.visibility = if (show) View.VISIBLE else View.GONE
@@ -110,7 +130,7 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         dataSet.valueTextSize = 14F
         dataSet.valueTextColor = Color.WHITE
         dataSet.color = ContextCompat.getColor(this, R.color.color_primary)
-        dataSet.setCircleColor(ContextCompat.getColor(this, R.color.color_secondary))
+        dataSet.setCircleColor(ContextCompat.getColor(this, R.color.color_primary))
         dataSet.setDrawValues(true)
 
         val lineData = LineData(dataSet)
