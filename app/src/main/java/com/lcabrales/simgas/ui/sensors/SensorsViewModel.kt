@@ -64,6 +64,8 @@ class SensorsViewModel : BaseViewModel() {
     }
 
     private fun onRetrieveSensorListError() {
+        showLoadingLiveData.value = false
+
         showToastLiveData.value = R.string.network_error
     }
 }
