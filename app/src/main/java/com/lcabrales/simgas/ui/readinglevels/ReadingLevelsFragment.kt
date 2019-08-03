@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.annotation.UiThread
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -20,6 +22,7 @@ import com.lcabrales.simgas.R
 import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.common.Utils
 import com.lcabrales.simgas.databinding.FragmentReadingLevelsBinding
+import com.lcabrales.simgas.model.filter.DaysAgoFilter
 import com.lcabrales.simgas.model.readings.daily.SensorDailyAverage
 import com.lcabrales.simgas.ui.sensordetail.DateValueFormatter
 
@@ -44,13 +47,15 @@ class ReadingLevelsFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(ReadingLevelsViewModel::class.java)
 
         setupLineChart()
+        setupDaysAgoFilter()
         subscribe()
     }
 
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
-        viewModel.sendDailyAverageListLiveData.observe(viewLifecycleOwner, Observer(this::populateDailyAverageData))
+        viewModel.sendDailyAverageListLiveData.observe(viewLifecycleOwner,
+            Observer(this::populateDailyAverageData))
     }
 
     private fun setupLineChart() {
@@ -61,6 +66,22 @@ class ReadingLevelsFragment : BaseFragment() {
         binding.lineChart.setNoDataTextColor(
             ContextCompat.getColor(context!!, R.color.color_primary))
         binding.lineChart.setNoDataText(getString(R.string.reading_levels_fragment_chart_no_data))
+    }
+
+    private fun setupDaysAgoFilter() {
+        val filters = DaysAgoFilter.getDefaultFilters(context!!)
+        val adapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, filters)
+        binding.spDaysFilter.adapter = adapter
+        binding.spDaysFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int,
+                                        id: Long) {
+                viewModel.setSelectedFilter(filters[position])
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
     }
 
     @UiThread
@@ -83,7 +104,7 @@ class ReadingLevelsFragment : BaseFragment() {
 
             sensorDailyAverage.dailyAverages!!.forEach {
                 val timeStamp = Dates.getFormattedDate(it.createdDate, Dates.SERVER_FORMAT).time
-                chartEntries.add(Entry(timeStamp.toFloat(), it.gasPpm!!.toFloat()))
+                chartEntries.add(Entry(timeStamp.toFloat(), it.gasPercentage!!.toFloat()))
             }
 
             val dataSet = LineDataSet(chartEntries, sensorDailyAverage.sensor!!.name)

@@ -8,6 +8,14 @@
     <string name="network_error">A network error has occurred</string>
     <string name="ppm_value">%d ppm</string>
     <string name="empty_text">There is no data to display</string>
+    <!--region Days Ago Filters-->
+    <string name="past_day">Past 24 hours</string>
+    <string name="past_week">Past week</string>
+    <string name="past_month">Past month</string>
+    <string name="past_trimester">Past 3 months</string>
+    <string name="past_semester">Past 6 months</string>
+    <string name="past_year">Past year</string>
+    <!--endregion-->
     <!--endregion-->
 
     <!--region Login-->

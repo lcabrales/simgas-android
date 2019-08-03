@@ -6,6 +6,7 @@ import com.lcabrales.simgas.R
 import com.lcabrales.simgas.base.BaseViewModel
 import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.data.RemoteApiInterface
+import com.lcabrales.simgas.model.filter.DaysAgoFilter
 import com.lcabrales.simgas.model.readings.daily.DailyAverageReadingResponse
 import com.lcabrales.simgas.model.readings.daily.SensorDailyAverage
 import com.lcabrales.simgas.model.sensors.GetSensorsResponse
@@ -32,9 +33,10 @@ class ReadingLevelsViewModel : BaseViewModel() {
     private var webCount = 0
     private var webCompleted = 0
     private lateinit var sensorDailyAverageList: MutableList<SensorDailyAverage>
+    private lateinit var selectedDaysFilter: DaysAgoFilter
 
     init {
-        loadSensors()
+        //init is empty because the View will init with the spinner selection
     }
 
     override fun onCleared() {
@@ -80,9 +82,15 @@ class ReadingLevelsViewModel : BaseViewModel() {
     }
     //endregion
 
+    //region Daily Averages
+     fun setSelectedFilter(filter: DaysAgoFilter){
+        selectedDaysFilter = filter
+        loadSensors()
+    }
+
     private fun fetchDailyAverages(sensorId: String) {
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_MONTH, -180)
+        calendar.add(Calendar.DAY_OF_YEAR, -selectedDaysFilter.numberOfDaysAgo)
         val dateString = Dates.getFormattedDateString(calendar.timeInMillis,
             Dates.SERVER_FORMAT_SHORT)
 
@@ -105,6 +113,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
     private fun onRetrieveDailyAveragesError() {
         showToastLiveData.value = R.string.network_error
     }
+    //endregion
 
     private fun onRetrieveDataFinish() {
         webCompleted++

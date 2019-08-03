@@ -5,6 +5,14 @@
     <string name="network_error">Ha ocurrido un error de conexión</string>
     <string name="ppm_value">%d ppm</string>
     <string name="empty_text">No hay datos para mostrar</string>
+    <!--region Days Ago Filters-->
+    <string name="past_day">Últimas 24 horas</string>
+    <string name="past_week">Última semana</string>
+    <string name="past_month">Último mes</string>
+    <string name="past_trimester">Último trimestre</string>
+    <string name="past_semester">Último semestre</string>
+    <string name="past_year">Último año</string>
+    <!--endregion-->
     <!--endregion-->
 
     <!--region Login-->
