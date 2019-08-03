@@ -59,6 +59,8 @@ class ReadingLevelsFragment : BaseFragment() {
     }
 
     private fun setupLineChart() {
+        binding.lineChart.axisLeft.valueFormatter = PercentFormatter()
+        binding.lineChart.axisRight.valueFormatter = PercentFormatter()
         binding.lineChart.xAxis.valueFormatter = DateValueFormatter()
         binding.lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         binding.lineChart.legend.isEnabled = true
@@ -104,7 +106,9 @@ class ReadingLevelsFragment : BaseFragment() {
 
             sensorDailyAverage.dailyAverages!!.forEach {
                 val timeStamp = Dates.getFormattedDate(it.createdDate, Dates.SERVER_FORMAT).time
-                chartEntries.add(Entry(timeStamp.toFloat(), it.gasPercentage!!.toFloat()))
+                var percentage = it.gasPercentage!!.toFloat() * 100
+                if (percentage > 100) percentage = 100f
+                chartEntries.add(Entry(timeStamp.toFloat(), percentage))
             }
 
             val dataSet = LineDataSet(chartEntries, sensorDailyAverage.sensor!!.name)

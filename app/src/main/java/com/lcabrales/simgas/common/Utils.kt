@@ -9,7 +9,7 @@ import java.util.*
 object Utils {
 
     fun getFormattedPercentValue(percent: Double): String {
-        val df = DecimalFormat("#.0")
+        val df = DecimalFormat("#.#")
         df.roundingMode = RoundingMode.HALF_EVEN
 
         return String.format(Locale.US, "%s%%", df.format(percent))
