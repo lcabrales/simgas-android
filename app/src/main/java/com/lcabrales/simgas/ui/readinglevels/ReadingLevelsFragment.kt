@@ -16,6 +16,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.lcabrales.simgas.BaseFragment
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.common.Dates
+import com.lcabrales.simgas.common.Utils
 import com.lcabrales.simgas.databinding.FragmentReadingLevelsBinding
 import com.lcabrales.simgas.model.readings.daily.SensorDailyAverage
 import com.lcabrales.simgas.ui.sensordetail.DateValueFormatter
@@ -87,7 +88,7 @@ class ReadingLevelsFragment : BaseFragment() {
     @UiThread
     private fun populateTodayData(list: List<SensorDailyAverage>) {
         val pieChartEntries = ArrayList<PieEntry>()
-        val chartColors = resources.getIntArray(R.array.chart_colors).toList()
+        val chartColors = Utils.getChartColors(context!!, list.size)
 
         list.forEach {
             pieChartEntries.add(PieEntry(it.dailyAverages!!.last().gasPercentage!!.toFloat() * 100, it.sensor!!.name))
@@ -113,7 +114,7 @@ class ReadingLevelsFragment : BaseFragment() {
         }
 
         val dataSetList = ArrayList<ILineDataSet>()
-        val chartColors = resources.getIntArray(R.array.chart_colors)
+        val chartColors = Utils.getChartColors(context!!, list.size)
 
         list.forEachIndexed { index, sensorDailyAverage ->
             val chartEntries = ArrayList<Entry>()

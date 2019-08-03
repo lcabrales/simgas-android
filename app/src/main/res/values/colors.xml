@@ -30,14 +30,13 @@
     <color name="chart_yellow">#ffa600</color>
 
     <array name="chart_colors">
-        <!--todo dynamic array in kotlin code depending on the number of data sets-->
         <item>@color/chart_indigo</item>
-        <!--<item>@color/chart_blue</item>-->
-        <!--<item>@color/chart_purple</item>-->
-        <!--<item>@color/chart_lilac</item>-->
+        <item>@color/chart_blue</item>
+        <item>@color/chart_purple</item>
+        <item>@color/chart_lilac</item>
         <item>@color/chart_violet</item>
-        <!--<item>@color/chart_magenta</item>-->
-        <!--<item>@color/chart_orange</item>-->
+        <item>@color/chart_magenta</item>
+        <item>@color/chart_orange</item>
         <item>@color/chart_yellow</item>
     </array>
     <!--endregion-->
