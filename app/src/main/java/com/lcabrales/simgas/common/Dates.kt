@@ -18,6 +18,8 @@ object Dates {
                                outputFormat: String): String {
         val originalFormat = SimpleDateFormat(inputFormat, Locale.US)
         val targetFormat = SimpleDateFormat(outputFormat, Locale.US)
+        originalFormat.timeZone = TimeZone.getTimeZone("UTC")
+        targetFormat.timeZone = TimeZone.getDefault()
         val date = originalFormat.parse(originalDateString)
         return targetFormat.format(date)
     }
@@ -29,8 +31,9 @@ object Dates {
     }
 
     fun getFormattedDate(dateString: String?, inputFormat: String) : Date {
-        val format = SimpleDateFormat(inputFormat, Locale.US)
-        return format.parse(dateString)
+        val localDate = getFormattedDateString(dateString, inputFormat, SERVER_FORMAT)
+        val format = SimpleDateFormat(SERVER_FORMAT, Locale.US)
+        return format.parse(localDate)
     }
 
     fun getRelativeTimeString(timeInMillis: Long, locale: Locale = Locale.getDefault()): String {
