@@ -3,6 +3,8 @@ package com.lcabrales.simgas.ui.sensordetail
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -23,6 +25,7 @@ import com.lcabrales.simgas.databinding.ActivitySensorDetailBinding
 import com.lcabrales.simgas.model.filter.DaysAgoFilter
 import com.lcabrales.simgas.model.readings.daily.DailyAverage
 import com.lcabrales.simgas.model.sensors.Sensor
+import com.lcabrales.simgas.ui.dialog.AirQualityDialogFragment
 import com.lcabrales.simgas.ui.sensorreadings.SensorReadingsActivity
 
 class SensorDetailActivity : BaseBackArrowActivity() {
@@ -31,6 +34,7 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         const val EXTRA_SENSOR_ID = "ExtraSensorId"
         const val EXTRA_TITLE = "ExtraTitle"
         const val EXTRA_SUBTITLE = "ExtraSubtitle"
+        const val FRAGMENT_AIR_QUALITY_TAG = "AirQualityFragment"
     }
 
     private lateinit var viewModel: SensorDetailViewModel
@@ -148,5 +152,22 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         intent.putExtra(SensorReadingsActivity.EXTRA_SUBTITLE,
             this.intent.getStringExtra(EXTRA_SUBTITLE))
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.sensor_detail_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.menu_info -> {
+                val sensor = viewModel.getSensor()
+                val fragment = sensor?.let { AirQualityDialogFragment.newInstance(it) }
+                fragment?.show(supportFragmentManager, FRAGMENT_AIR_QUALITY_TAG)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

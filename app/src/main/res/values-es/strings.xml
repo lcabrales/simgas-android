@@ -5,6 +5,7 @@
     <string name="network_error">Ha ocurrido un error de conexión</string>
     <string name="ppm_value">%d ppm</string>
     <string name="empty_text">No hay datos para mostrar</string>
+    <string name="close">Cerrar</string>
     <!--region Days Ago Filters-->
     <string name="past_day">Últimas 24 horas</string>
     <string name="past_week">Última semana</string>
@@ -66,6 +67,8 @@
     <string name="sensor_detail_activity_daily_average">Promedio Diario</string>
     <string name="sensor_detail_activity_view_last_readings">Ver Últimas Lecturas</string>
     <string name="sensor_detail_activity_chart_no_data">@string/empty_text</string>
+    <string name="sensor_detail_activity_menu_info">Calidad de Aire</string>
+    <string name="sensor_detail_activity_dialog_info_title">Calidad de Aire</string>
     <!--endregion-->
 
     <!--region LastReadings-->

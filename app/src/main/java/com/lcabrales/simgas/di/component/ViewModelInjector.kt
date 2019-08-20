@@ -1,10 +1,11 @@
 package com.lcabrales.simgas.di.component
 
 import com.lcabrales.simgas.di.module.NetworkModule
-import com.lcabrales.simgas.ui.readinglevels.ReadingLevelsViewModel
+import com.lcabrales.simgas.ui.dialog.AirQualityDialogViewModel
 import com.lcabrales.simgas.ui.login.LoginViewModel
 import com.lcabrales.simgas.ui.main.MainViewModel
 import com.lcabrales.simgas.ui.profile.ProfileViewModel
+import com.lcabrales.simgas.ui.readinglevels.ReadingLevelsViewModel
 import com.lcabrales.simgas.ui.register.RegisterViewModel
 import com.lcabrales.simgas.ui.sensordetail.SensorDetailViewModel
 import com.lcabrales.simgas.ui.sensorreadings.SensorReadingsViewModel
@@ -27,6 +28,7 @@ interface ViewModelInjector {
     fun inject(sensorDetailViewModel: SensorDetailViewModel)
     fun inject(sensorReadingsViewModel: SensorReadingsViewModel)
     fun inject(readingLevelsViewModel: ReadingLevelsViewModel)
+    fun inject(airQualityDialogViewModel: AirQualityDialogViewModel)
 
     @Component.Builder
     interface Builder {

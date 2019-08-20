@@ -37,6 +37,7 @@ class SensorDetailViewModel : BaseViewModel() {
     private var webCompleted = 0
     private lateinit var sensorId: String
     private lateinit var selectedDaysFilter: DaysAgoFilter
+    private var sensor: Sensor? = null
 
     override fun onCleared() {
         super.onCleared()
@@ -53,6 +54,10 @@ class SensorDetailViewModel : BaseViewModel() {
         webCount++
     }
 
+    fun getSensor(): Sensor? {
+        return sensor
+    }
+
     //region Sensor
     private fun fetchSensor(sensorId: String) {
         val disposable = remoteApiInterface.getSensorDetail(sensorId)
@@ -66,7 +71,8 @@ class SensorDetailViewModel : BaseViewModel() {
     private fun onRetrieveSensorSuccess(response: GetSensorsResponse) {
         Log.d(TAG, "onRetrieveSensorSuccess: $response")
 
-        sendSensorDataLiveData.value = response.data?.get(0)
+        sensor = response.data?.get(0)
+        sendSensorDataLiveData.value = sensor
     }
 
     private fun onRetrieveSensorError() {

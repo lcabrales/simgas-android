@@ -1,5 +1,6 @@
 package com.lcabrales.simgas.data
 
+import com.lcabrales.simgas.model.airquality.GetAirQualityResponse
 import com.lcabrales.simgas.model.readings.GetSensorReadingsResponse
 import com.lcabrales.simgas.model.readings.daily.DailyAverageReadingResponse
 import com.lcabrales.simgas.model.sensors.GetSensorsResponse
@@ -58,4 +59,10 @@ interface RemoteApiInterface {
     @GET("/SensorReading/SensorId/{SensorId}")
     fun getLatestSensorReadings(@Path("SensorId") sensorId: String, @Query(
         "StartDate") startDate: String): Observable<GetSensorReadingsResponse>
+
+    /**
+     * Get the list of the AirQuality's for a specific Gas from the remote API
+     */
+    @GET("/AirQuality")
+    fun getAirQualities(@Query("GasId") gasId: String): Observable<GetAirQualityResponse>
 }
