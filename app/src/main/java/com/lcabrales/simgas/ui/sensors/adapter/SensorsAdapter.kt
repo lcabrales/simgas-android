@@ -31,12 +31,13 @@ class SensorsAdapter(private val dataset: List<Sensor>,
         val context = holder.getBinding().tvTitle.context
 
         holder.getBinding().tvTitle.text = item.name
-        holder.getBinding().tvSubtitle.text = item.gas?.name
-        holder.getBinding().tvLastReading.text = context.getString(
-            R.string.ppm_value, item.lastSensorReading?.gasPpm)
 
         val date = Dates.getFormattedDate(item.lastSensorReading?.createdDate, Dates.SERVER_FORMAT)
         holder.getBinding().tvLastReadingDate.text = Dates.getRelativeTimeString(date.time)
+
+        holder.getBinding().tvAirQualityValue.text = item.lastSensorReading?.airQuality?.name
+        holder.getBinding().tvLastReading.text = context.getString(
+            R.string.ppm_value, item.lastSensorReading?.gasPpm)
 
         val progressVal = (item.lastSensorReading?.gasPercentage!! * holder.getBinding().pbLastReading.max).toInt()
         holder.getBinding().pbLastReading.progress = progressVal
