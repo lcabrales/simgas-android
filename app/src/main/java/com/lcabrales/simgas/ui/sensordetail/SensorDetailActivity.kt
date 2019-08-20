@@ -33,7 +33,6 @@ class SensorDetailActivity : BaseBackArrowActivity() {
     companion object {
         const val EXTRA_SENSOR_ID = "ExtraSensorId"
         const val EXTRA_TITLE = "ExtraTitle"
-        const val EXTRA_SUBTITLE = "ExtraSubtitle"
         const val FRAGMENT_AIR_QUALITY_TAG = "AirQualityFragment"
     }
 
@@ -69,7 +68,6 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         super.setupToolbar(toolbar)
 
         toolbar.title = intent.getStringExtra(EXTRA_TITLE)
-        toolbar.subtitle = intent.getStringExtra(EXTRA_SUBTITLE)
     }
 
     private fun setOnClickListeners() {
@@ -149,8 +147,6 @@ class SensorDetailActivity : BaseBackArrowActivity() {
         intent.putExtra(SensorReadingsActivity.EXTRA_SENSOR_ID,
             this.intent.getStringExtra(EXTRA_SENSOR_ID))
         intent.putExtra(SensorReadingsActivity.EXTRA_TITLE, this.intent.getStringExtra(EXTRA_TITLE))
-        intent.putExtra(SensorReadingsActivity.EXTRA_SUBTITLE,
-            this.intent.getStringExtra(EXTRA_SUBTITLE))
         startActivity(intent)
     }
 

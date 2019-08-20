@@ -72,7 +72,6 @@ class SensorsFragment : BaseFragment(), SensorsFragmentInterface {
         val intent = Intent(context, SensorDetailActivity::class.java)
         intent.putExtra(SensorDetailActivity.EXTRA_SENSOR_ID, sensor.sensorId)
         intent.putExtra(SensorDetailActivity.EXTRA_TITLE, sensor.name)
-        intent.putExtra(SensorDetailActivity.EXTRA_SUBTITLE, sensor.gas?.name)
         startActivity(intent)
     }
 }

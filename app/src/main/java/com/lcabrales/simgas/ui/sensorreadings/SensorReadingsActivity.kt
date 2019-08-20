@@ -20,7 +20,6 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
     companion object {
         const val EXTRA_SENSOR_ID = "ExtraSensorId"
         const val EXTRA_TITLE = "ExtraTitle"
-        const val EXTRA_SUBTITLE = "ExtraSubtitle"
     }
 
     private lateinit var viewModel: SensorReadingsViewModel
@@ -53,7 +52,6 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
         super.setupToolbar(toolbar)
 
         toolbar.title = intent.getStringExtra(EXTRA_TITLE)
-        toolbar.subtitle = intent.getStringExtra(EXTRA_SUBTITLE)
     }
 
     private fun setupRecycler() {
