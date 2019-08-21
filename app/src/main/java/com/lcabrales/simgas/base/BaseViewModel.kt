@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.lcabrales.simgas.di.component.DaggerViewModelInjector
 import com.lcabrales.simgas.di.component.ViewModelInjector
 import com.lcabrales.simgas.di.module.NetworkModule
+import com.lcabrales.simgas.ui.aboutus.AboutUsViewModel
 import com.lcabrales.simgas.ui.dialog.AirQualityDialogViewModel
 import com.lcabrales.simgas.ui.login.LoginViewModel
 import com.lcabrales.simgas.ui.main.MainViewModel
@@ -38,6 +39,7 @@ abstract class BaseViewModel : ViewModel() {
             is SensorReadingsViewModel -> injector.inject(this)
             is ReadingLevelsViewModel -> injector.inject(this)
             is AirQualityDialogViewModel -> injector.inject(this)
+            is AboutUsViewModel -> injector.inject(this)
         }
     }
 }

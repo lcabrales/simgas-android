@@ -83,4 +83,12 @@
     <string name="reading_levels_fragment_daily_average">Daily Average</string>
     <string name="reading_levels_fragment_chart_no_data">@string/empty_text</string>
     <!--endregion-->
+
+    <!--region AboutUs-->
+    <string name="about_us_fragment_creators_title">Desarrolladores</string>
+    <string name="about_us_fragment_project_title">Acerca del Projecto</string>
+    <string name="about_us_fragment_project_description">Sistema de Monitorización de Gases Tóxicos
+        Emitidos Durante el Proceso de Soldadura en el Taller del Instituto Profesional y Técnico de
+        Veraguas (IPTV)</string>
+    <!--endregion-->
 </resources>

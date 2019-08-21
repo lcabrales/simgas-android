@@ -88,4 +88,12 @@
     <string name="reading_levels_fragment_daily_average">Daily Average</string>
     <string name="reading_levels_fragment_chart_no_data">@string/empty_text</string>
     <!--endregion-->
+
+    <!--region AboutUs-->
+    <string name="about_us_fragment_creators_title">Developers</string>
+    <string name="about_us_fragment_creators_description" translatable="false">Lucas Cabrales\nEric Pérez</string>
+    <string name="about_us_fragment_project_title">About Project</string>
+    <string name="about_us_fragment_project_description">Monitoring System for Dangerous Gases Emitted
+        During the Welding Process</string>
+    <!--endregion-->
 </resources>
