@@ -74,6 +74,8 @@
     <string name="sensor_detail_activity_chart_no_data">@string/empty_text</string>
     <string name="sensor_detail_activity_menu_info">Air Quality Info</string>
     <string name="sensor_detail_activity_dialog_info_title">Air Quality</string>
+    <string name="sensor_detail_activity_dialog_info_header_ppm">Measure (ppm)</string>
+    <string name="sensor_detail_activity_dialog_info_header_value">Assessment</string>
     <!--endregion-->
 
     <!--region LastReadings-->
