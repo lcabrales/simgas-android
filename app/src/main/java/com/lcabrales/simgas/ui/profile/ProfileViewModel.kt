@@ -28,6 +28,7 @@ class ProfileViewModel(private val userDao: UserDao) : BaseViewModel() {
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val userLiveData: MutableLiveData<User> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
+    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
     val enableSubmitButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -89,15 +90,13 @@ class ProfileViewModel(private val userDao: UserDao) : BaseViewModel() {
     private fun onEditRequestSuccess(response: UserResponse) {
         Log.d(TAG, "onEditRequestSuccess: $response")
 
-        when {
-            response.user == null -> {
-                showToastLiveData.value = R.string.network_error
-            }
-            else -> {
-                showToastLiveData.value = R.string.profile_fragment_edit_success
-                saveUserIntoDatabase(response.user!!)
-            }
+        if (response.result?.code != 200) {
+            showToastStringLiveData.value = response.result?.message
+            return
         }
+
+        showToastLiveData.value = R.string.profile_fragment_edit_success
+        saveUserIntoDatabase(response.user!!)
     }
 
     private fun onEditRequestError() {

@@ -58,6 +58,7 @@ class SensorDetailActivity : BaseBackArrowActivity() {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(this, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(this, Observer(this::showToast))
+        viewModel.showToastStringLiveData.observe(this, Observer(this::showToast))
         viewModel.showContentsLiveData.observe(this, Observer(this::showContents))
         viewModel.sendSensorDataLiveData.observe(this, Observer(this::populateSensorData))
         viewModel.sendDailyAveragesDataLiveData.observe(this,

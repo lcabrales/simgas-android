@@ -43,6 +43,7 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(this, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(this, Observer(this::showToast))
+        viewModel.showToastStringLiveData.observe(this, Observer(this::showToast))
         viewModel.sendSensorReadingsLiveData.observe(this, Observer(this::updateSensorsListUi))
         viewModel.showEmptyViewLiveData.observe(this, Observer(this::showEmptyView))
         viewModel.showRecyclerViewLiveData.observe(this, Observer(this::showRecyclerView))

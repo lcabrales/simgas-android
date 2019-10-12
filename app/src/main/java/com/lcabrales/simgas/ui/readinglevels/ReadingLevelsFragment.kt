@@ -54,6 +54,7 @@ class ReadingLevelsFragment : BaseFragment() {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
+        viewModel.showToastStringLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
         viewModel.sendDailyAverageListLiveData.observe(viewLifecycleOwner,
             Observer(this::populateDailyAverageData))
     }

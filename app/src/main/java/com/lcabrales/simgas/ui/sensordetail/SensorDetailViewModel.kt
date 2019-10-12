@@ -29,6 +29,7 @@ class SensorDetailViewModel : BaseViewModel() {
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showContentsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
+    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
     val sendSensorDataLiveData: MutableLiveData<Sensor> = MutableLiveData()
     val sendDailyAveragesDataLiveData: MutableLiveData<List<DailyAverage>> = MutableLiveData()
 
@@ -71,6 +72,12 @@ class SensorDetailViewModel : BaseViewModel() {
     private fun onRetrieveSensorSuccess(response: GetSensorsResponse) {
         Log.d(TAG, "onRetrieveSensorSuccess: $response")
 
+        if (response.result?.code != 200) {
+            showLoadingLiveData.value = false
+            showToastStringLiveData.value = response.result?.message
+            return
+        }
+
         sensor = response.data?.get(0)
         sendSensorDataLiveData.value = sensor
     }
@@ -104,6 +111,12 @@ class SensorDetailViewModel : BaseViewModel() {
 
     private fun onRetrieveDailyAveragesSuccess(response: DailyAverageReadingResponse) {
         Log.d(TAG, "onRetrieveDailyAveragesSuccess: $response")
+
+        if (response.result?.code != 200) {
+            showLoadingLiveData.value = false
+            showToastStringLiveData.value = response.result?.message
+            return
+        }
 
         sendDailyAveragesDataLiveData.value = response.data?.dailyAverages
     }

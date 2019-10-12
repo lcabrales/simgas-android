@@ -25,6 +25,7 @@ class SensorReadingsViewModel : BaseViewModel() {
 
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
+    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
     val sendSensorReadingsLiveData: MutableLiveData<List<SensorReading>> = MutableLiveData()
     val showRecyclerViewLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showEmptyViewLiveData: MutableLiveData<Boolean> = MutableLiveData()
@@ -68,6 +69,7 @@ class SensorReadingsViewModel : BaseViewModel() {
         val isEmpty = response.data.isNullOrEmpty()
         showEmptyViewLiveData.value = isEmpty
         showRecyclerViewLiveData.value = !isEmpty
+
 
         sendSensorReadingsLiveData.value = response.data
     }

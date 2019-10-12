@@ -18,4 +18,9 @@ abstract class BaseFragment : Fragment() {
     fun showToast(@StringRes stringRes: Int) {
         Toast.makeText(context, getString(stringRes), Toast.LENGTH_SHORT).show()
     }
+
+    @UiThread
+    fun showToast(string: String) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+    }
 }

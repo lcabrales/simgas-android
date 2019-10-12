@@ -27,6 +27,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
 
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
+    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
     val sendDailyAverageListLiveData: MutableLiveData<List<SensorDailyAverage>> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -64,8 +65,9 @@ class ReadingLevelsViewModel : BaseViewModel() {
     private fun onRetrieveSensorListSuccess(response: GetSensorsResponse) {
         Log.d(TAG, "onRetrieveSensorListSuccess: $response")
 
-        if (response.data.isNullOrEmpty()) {
+        if (response.result?.code != 200) {
             showLoadingLiveData.value = false
+            showToastStringLiveData.value = response.result?.message
             return
         }
 
@@ -79,6 +81,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
 
     private fun onRetrieveSensorListError() {
         showToastLiveData.value = R.string.network_error
+        showLoadingLiveData.value = false
     }
     //endregion
 
@@ -105,6 +108,12 @@ class ReadingLevelsViewModel : BaseViewModel() {
     private fun onRetrieveDailyAveragesSuccess(response: DailyAverageReadingResponse) {
         Log.d(TAG, "onRetrieveDailyAveragesSuccess: $response")
 
+        if (response.result?.code != 200) {
+            showLoadingLiveData.value = false
+            showToastStringLiveData.value = response.result?.message
+            return
+        }
+
         if (response.data == null || response.data!!.dailyAverages.isNullOrEmpty()) return
 
         sensorDailyAverageList.add(response.data!!)
@@ -112,6 +121,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
 
     private fun onRetrieveDailyAveragesError() {
         showToastLiveData.value = R.string.network_error
+        showLoadingLiveData.value = false
     }
     //endregion
 
