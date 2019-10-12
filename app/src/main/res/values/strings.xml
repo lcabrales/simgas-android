@@ -92,6 +92,8 @@
     <!--region AboutUs-->
     <string name="about_us_fragment_creators_title">Developers</string>
     <string name="about_us_fragment_creators_description" translatable="false">Lucas Cabrales\nEric Pérez</string>
+    <string name="about_us_fragment_advisers_title">Advisers</string>
+    <string name="about_us_fragment_advisers_description" translatable="false">María Vélez\nCristian Pinzón</string>
     <string name="about_us_fragment_project_title">About Project</string>
     <string name="about_us_fragment_project_description">Monitoring System for Dangerous Gases Emitted
         During the Welding Process</string>

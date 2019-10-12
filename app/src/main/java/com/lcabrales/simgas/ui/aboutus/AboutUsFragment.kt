@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.UiThread
+import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -31,7 +32,15 @@ class AboutUsFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AboutUsViewModel::class.java)
 
+        setProjectDescription()
+
         subscribe()
+    }
+
+    private fun setProjectDescription() {
+        binding.tvProjectDescription.text = HtmlCompat.fromHtml(
+            getString(R.string.about_us_fragment_project_description),
+            HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 
     private fun subscribe() {
