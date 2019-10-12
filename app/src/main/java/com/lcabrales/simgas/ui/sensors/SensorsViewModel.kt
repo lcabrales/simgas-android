@@ -37,7 +37,7 @@ class SensorsViewModel : BaseViewModel() {
         disposables.dispose()
     }
 
-    private fun loadSensors() {
+    fun loadSensors() {
         val disposable = remoteApiInterface.getSensors()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

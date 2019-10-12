@@ -2,6 +2,8 @@ package com.lcabrales.simgas.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.annotation.UiThread
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -24,6 +26,8 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+    private var currentFragment: Fragment? = null
+    private var menuRef: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,9 +94,12 @@ class MainActivity : BaseActivity() {
     private fun showFragment(fragment: Fragment, title: CharSequence) {
         supportActionBar?.title = title
 
+        currentFragment = fragment
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_container, fragment)
             .commitNow()
+
+        setRefreshMenuVisibility()
     }
 
     private fun showLogoutDialog() {
@@ -120,5 +127,28 @@ class MainActivity : BaseActivity() {
     private fun completeLogout() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.sensors_menu, menu)
+        menuRef = menu
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.menu_refresh -> {
+                if (currentFragment is SensorsFragment) {
+                    (currentFragment as SensorsFragment).refreshSensors()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setRefreshMenuVisibility() {
+        val refreshMenu = menuRef?.findItem(R.id.menu_refresh)
+        refreshMenu?.isVisible = currentFragment is SensorsFragment
     }
 }

@@ -75,4 +75,8 @@ class SensorsFragment : BaseFragment(), SensorsFragmentInterface {
         intent.putExtra(SensorDetailActivity.EXTRA_TITLE, sensor.name)
         startActivity(intent)
     }
+
+    fun refreshSensors() {
+        viewModel.loadSensors()
+    }
 }

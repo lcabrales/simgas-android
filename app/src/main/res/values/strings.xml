@@ -57,6 +57,10 @@
     <string name="main_activity_logout_confirmation_negative">Cancel</string>
     <!--endregion-->
 
+    <!--region Sensors-->
+    <string name="sensors_fragment_menu_refresh">Refresh</string>
+    <!--endregion-->
+
     <!--region Profile-->
     <string name="profile_fragment_username_hint">@string/register_activity_username_hint</string>
     <string name="profile_fragment_first_name_hint">@string/register_activity_first_name_hint</string>
