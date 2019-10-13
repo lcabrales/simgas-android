@@ -112,7 +112,7 @@ class SensorDetailActivity : BaseBackArrowActivity() {
 
     @UiThread
     private fun populateSensorData(sensor: Sensor) {
-        binding.tvDescriptionValue.text = sensor.shortDescription
+        binding.tvDescriptionValue.text = sensor.fullDescription
     }
 
     @UiThread
