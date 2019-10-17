@@ -29,7 +29,7 @@ class SensorDetailViewModel : BaseViewModel() {
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showContentsLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
-    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
+    val showAlertLiveData: MutableLiveData<String> = MutableLiveData()
     val sendSensorDataLiveData: MutableLiveData<Sensor> = MutableLiveData()
     val sendDailyAveragesDataLiveData: MutableLiveData<List<DailyAverage>> = MutableLiveData()
 
@@ -74,7 +74,7 @@ class SensorDetailViewModel : BaseViewModel() {
 
         if (response.result?.code != 200) {
             showLoadingLiveData.value = false
-            showToastStringLiveData.value = response.result?.message
+            showAlertLiveData.value = response.result?.message
             return
         }
 
@@ -114,7 +114,7 @@ class SensorDetailViewModel : BaseViewModel() {
 
         if (response.result?.code != 200) {
             showLoadingLiveData.value = false
-            showToastStringLiveData.value = response.result?.message
+            showAlertLiveData.value = response.result?.message
             return
         }
 

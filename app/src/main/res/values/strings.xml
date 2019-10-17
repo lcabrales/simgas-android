@@ -11,6 +11,8 @@
     <string name="range_separator" translatable="false">-</string>
     <string name="close">Close</string>
     <string name="infinity" translatable="false">\u221E</string>
+    <string name="alert_dialog_title">Alert</string>
+    <string name="alert_dialog_positive">@string/close</string>
     <!--region Days Ago Filters-->
     <string name="past_day">Past 24 hours</string>
     <string name="past_week">Past week</string>

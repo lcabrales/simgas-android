@@ -57,8 +57,8 @@ class AirQualityDialogViewModel : BaseViewModel() {
     private fun onRetrieveAirQualityListSuccess(response: GetAirQualityResponse) {
         Log.d(TAG, "onRetrieveAirQualityListSuccess: $response")
 
-        if (response.data.isNullOrEmpty()) {
-            showLoadingLiveData.value = false
+        if (response.result?.code != 200) {
+            showToastLiveData.value = R.string.network_error
             return
         }
 

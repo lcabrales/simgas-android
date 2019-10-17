@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 abstract class BaseFragment : Fragment() {
 
@@ -20,7 +21,11 @@ abstract class BaseFragment : Fragment() {
     }
 
     @UiThread
-    fun showToast(string: String) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+    fun showAlertDialog(string: String) {
+        val builder = MaterialAlertDialogBuilder(context)
+        builder.setTitle(R.string.alert_dialog_title)
+        builder.setMessage(string)
+        builder.setPositiveButton(R.string.alert_dialog_positive, null)
+        builder.show()
     }
 }

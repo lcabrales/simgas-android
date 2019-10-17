@@ -37,7 +37,7 @@ class RegisterActivity : BaseBackArrowActivity() {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(this, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(this, Observer(this::showToast))
-        viewModel.showToastStringLiveData.observe(this, Observer(this::showToast))
+        viewModel.showAlertLiveData.observe(this, Observer(this::showAlertDialog))
         viewModel.registerCompletedLiveData.observe(this, Observer { completeRegister() })
         viewModel.enableRegisterButtonLiveData.observe(this, Observer(this::enableRegisterButton))
     }

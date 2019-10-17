@@ -52,6 +52,7 @@ class LoginActivity : BaseActivity() {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(this, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(this, Observer(this::showToast))
+        viewModel.showAlertLiveData.observe(this, Observer(this::showAlertDialog))
         viewModel.loginCompletedLiveData.observe(this, Observer { completeLogin() })
         viewModel.enableLoginButtonLiveData.observe(this, Observer(this::enableLoginButton))
         viewModel.clearUserFieldLiveData.observe(this, Observer(this::clearUserField))

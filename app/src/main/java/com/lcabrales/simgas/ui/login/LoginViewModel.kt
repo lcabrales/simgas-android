@@ -7,9 +7,9 @@ import com.lcabrales.simgas.R
 import com.lcabrales.simgas.base.BaseViewModel
 import com.lcabrales.simgas.data.RemoteApiInterface
 import com.lcabrales.simgas.model.session.LoginRequest
-import com.lcabrales.simgas.model.session.UserResponse
 import com.lcabrales.simgas.model.session.User
 import com.lcabrales.simgas.model.session.UserDao
+import com.lcabrales.simgas.model.session.UserResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -29,6 +29,7 @@ class LoginViewModel(private val userDao: UserDao) : BaseViewModel() {
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val loginCompletedLiveData: MutableLiveData<User> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
+    val showAlertLiveData: MutableLiveData<String> = MutableLiveData()
     val enableLoginButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val clearUserFieldLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val clearPasswordFieldLiveData: MutableLiveData<Boolean> = MutableLiveData()
@@ -94,27 +95,14 @@ class LoginViewModel(private val userDao: UserDao) : BaseViewModel() {
     private fun onLoginRequestSuccess(response: UserResponse) {
         Log.d(TAG, "onLoginRequestSuccess: $response")
 
-        when {
-            response.result?.code == 400 -> {
-                //user does not exist
-                showToastLiveData.value = R.string.login_activity_user_does_not_exist
-                clearUserFieldLiveData.value = true
-                clearPasswordFieldLiveData.value = true
-            }
-            response.result?.code == 401 -> {
-                //invalid credentials
-                showToastLiveData.value = R.string.login_activity_invalid_credentials
-                clearPasswordFieldLiveData.value = true
-            }
-            response.user == null -> {
-                showToastLiveData.value = R.string.network_error
-                clearUserFieldLiveData.value = true
-                clearPasswordFieldLiveData.value = true
-            }
-            else -> {
-                saveUserIntoDatabase(response.user!!)
-            }
+        if (response.result?.code != 200) {
+            showAlertLiveData.value = response.result?.message
+            clearUserFieldLiveData.value = true
+            clearPasswordFieldLiveData.value = true
+            return
         }
+
+        saveUserIntoDatabase(response.user!!)
     }
 
     /**

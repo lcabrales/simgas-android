@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -34,7 +35,11 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     @UiThread
-    fun showToast(string: String) {
-        Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
+    fun showAlertDialog(string: String) {
+        val builder = MaterialAlertDialogBuilder(this)
+        builder.setTitle(R.string.alert_dialog_title)
+        builder.setMessage(string)
+        builder.setPositiveButton(R.string.alert_dialog_positive, null)
+        builder.show()
     }
 }

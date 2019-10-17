@@ -6,6 +6,8 @@
     <string name="ppm_value">%d ppm</string>
     <string name="empty_text">No hay datos para mostrar</string>
     <string name="close">Cerrar</string>
+    <string name="alert_dialog_title">Alerta</string>
+    <string name="alert_dialog_positive">@string/close</string>
     <!--region Days Ago Filters-->
     <string name="past_day">Últimas 24 horas</string>
     <string name="past_week">Última semana</string>

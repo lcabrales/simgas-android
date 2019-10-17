@@ -45,7 +45,7 @@ class ProfileFragment : BaseFragment() {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
-        viewModel.showToastStringLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
+        viewModel.showAlertLiveData.observe(viewLifecycleOwner, Observer(this::showAlertDialog))
         viewModel.userLiveData.observe(viewLifecycleOwner, Observer(this::populateUserInfo))
         viewModel.enableSubmitButtonLiveData.observe(viewLifecycleOwner,
             Observer(this::enableSubmitButton))

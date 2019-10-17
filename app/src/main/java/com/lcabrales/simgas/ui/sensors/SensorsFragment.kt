@@ -45,7 +45,7 @@ class SensorsFragment : BaseFragment(), SensorsFragmentInterface {
     private fun subscribe() {
         viewModel.showLoadingLiveData.observe(viewLifecycleOwner, Observer(this::showLoading))
         viewModel.showToastLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
-        viewModel.showToastStringLiveData.observe(viewLifecycleOwner, Observer(this::showToast))
+        viewModel.showAlertLiveData.observe(viewLifecycleOwner, Observer(this::showAlertDialog))
         viewModel.sendSensorsDataLiveData.observe(viewLifecycleOwner,
             Observer(this::updateSensorsListUi))
     }

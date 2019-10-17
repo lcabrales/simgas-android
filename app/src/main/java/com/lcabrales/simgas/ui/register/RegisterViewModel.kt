@@ -28,7 +28,7 @@ class RegisterViewModel(private val userDao: UserDao) : BaseViewModel() {
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val registerCompletedLiveData: MutableLiveData<User> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
-    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
+    val showAlertLiveData: MutableLiveData<String> = MutableLiveData()
     val enableRegisterButtonLiveData: MutableLiveData<Boolean> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -77,7 +77,7 @@ class RegisterViewModel(private val userDao: UserDao) : BaseViewModel() {
         Log.d(TAG, "onRegisterRequestSuccess: $response")
 
         if (response.result?.code != 200) {
-            showToastStringLiveData.value = response.result?.message
+            showAlertLiveData.value = response.result?.message
             return
         }
 

@@ -27,7 +27,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
 
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
-    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
+    val showAlertLiveData: MutableLiveData<String> = MutableLiveData()
     val sendDailyAverageListLiveData: MutableLiveData<List<SensorDailyAverage>> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -67,7 +67,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
 
         if (response.result?.code != 200) {
             showLoadingLiveData.value = false
-            showToastStringLiveData.value = response.result?.message
+            showAlertLiveData.value = response.result?.message
             return
         }
 
@@ -110,7 +110,7 @@ class ReadingLevelsViewModel : BaseViewModel() {
 
         if (response.result?.code != 200) {
             showLoadingLiveData.value = false
-            showToastStringLiveData.value = response.result?.message
+            showAlertLiveData.value = response.result?.message
             return
         }
 

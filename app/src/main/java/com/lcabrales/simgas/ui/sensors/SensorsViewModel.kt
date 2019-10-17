@@ -23,7 +23,7 @@ class SensorsViewModel : BaseViewModel() {
 
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
-    val showToastStringLiveData: MutableLiveData<String> = MutableLiveData()
+    val showAlertLiveData: MutableLiveData<String> = MutableLiveData()
     val sendSensorsDataLiveData: MutableLiveData<List<Sensor>> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -62,7 +62,7 @@ class SensorsViewModel : BaseViewModel() {
         Log.d(TAG, "onRetrieveSensorListSuccess: $response")
 
         if (response.result?.code != 200) {
-            showToastStringLiveData.value = response.result?.message
+            showAlertLiveData.value = response.result?.message
             return
         }
 
