@@ -25,7 +25,7 @@
     <string name="login_activity_username_hint">Username</string>
     <string name="login_activity_password_hint">Password</string>
     <string name="login_activity_button_login">Login</string>
-    <string name="login_activity_button_register">New Account</string>
+    <string name="login_activity_button_register">Create an Account</string>
     <string name="login_activity_empty_fields">Enter your credentials to login</string>
     <string name="login_activity_user_does_not_exist">User does not exist</string>
     <string name="login_activity_invalid_credentials">Invalid credentials. Verify your password.</string>
@@ -39,7 +39,7 @@
     <string name="register_activity_email_hint">Email</string>
     <string name="register_activity_password_hint">Password</string>
     <string name="register_activity_confirm_password_hint">Confirm your password</string>
-    <string name="register_activity_button_register">Create a new account</string>
+    <string name="register_activity_button_register">Create account</string>
     <string name="register_activity_empty_fields">Please fill out all the fields</string>
     <string name="register_activity_passwords_do_not_match">The passwords do not match</string>
     <!--endregion-->
