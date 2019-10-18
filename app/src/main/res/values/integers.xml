@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="guideline_air_quality_item" type="integer" format="float">0.50</item>
+</resources>
