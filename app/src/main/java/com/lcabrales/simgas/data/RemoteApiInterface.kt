@@ -58,7 +58,8 @@ interface RemoteApiInterface {
      */
     @GET("/SensorReading/SensorId/{SensorId}")
     fun getLatestSensorReadings(@Path("SensorId") sensorId: String, @Query(
-        "StartDate") startDate: String): Observable<GetSensorReadingsResponse>
+        "StartDate") startDate: String, @Query("PageNumber") pageNumber: Int, @Query(
+        "PageSize") pageSize: Int): Observable<GetSensorReadingsResponse>
 
     /**
      * Get the list of the AirQuality's for a specific Gas from the remote API

@@ -34,6 +34,7 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
 
         setupToolbar(binding.includeAppBar.toolbar)
         setupRecycler()
+        setOnClickListeners()
         subscribe()
 
         val sensorId = intent.getStringExtra(EXTRA_SENSOR_ID)
@@ -46,6 +47,8 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
         viewModel.showAlertLiveData.observe(this, Observer(this::showAlertDialog))
         viewModel.sendSensorReadingsLiveData.observe(this, Observer(this::updateSensorsListUi))
         viewModel.showEmptyViewLiveData.observe(this, Observer(this::showEmptyView))
+        viewModel.showLoadMoreLiveData.observe(this, Observer(this::showLoadMore))
+        viewModel.enableLoadMoreLiveData.observe(this, Observer(this::enableLoadMore))
         viewModel.showRecyclerViewLiveData.observe(this, Observer(this::showRecyclerView))
     }
 
@@ -61,6 +64,13 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
         binding.rvLastReadings.addItemDecoration(
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         binding.rvLastReadings.isNestedScrollingEnabled = false
+
+        adapter = SensorReadingsAdapter(ArrayList())
+        binding.rvLastReadings.adapter = adapter
+    }
+
+    private fun setOnClickListeners() {
+        binding.btnLoadMore.setOnClickListener { viewModel.loadMoreSensorReadings() }
     }
 
     @UiThread
@@ -79,8 +89,17 @@ class SensorReadingsActivity : BaseBackArrowActivity() {
     }
 
     @UiThread
-    private fun updateSensorsListUi(list: List<SensorReading>) {
-        adapter = SensorReadingsAdapter(list)
-        binding.rvLastReadings.adapter = adapter
+    private fun updateSensorsListUi(list: ArrayList<SensorReading>) {
+        adapter.addData(list)
+    }
+
+    @UiThread
+    private fun showLoadMore(show: Boolean) {
+        binding.btnLoadMore.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    @UiThread
+    private fun enableLoadMore(enable: Boolean) {
+        binding.btnLoadMore.isEnabled = enable
     }
 }

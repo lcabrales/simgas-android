@@ -18,6 +18,8 @@ class SensorReadingsViewModel : BaseViewModel() {
 
     companion object {
         private const val TAG = "SensorReadingsViewModel"
+        private const val PAGE_SIZE = 50
+        private const val DAYS_AGO = 7
     }
 
     @Inject
@@ -26,9 +28,15 @@ class SensorReadingsViewModel : BaseViewModel() {
     val showLoadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showToastLiveData: MutableLiveData<Int> = MutableLiveData()
     val showAlertLiveData: MutableLiveData<String> = MutableLiveData()
-    val sendSensorReadingsLiveData: MutableLiveData<List<SensorReading>> = MutableLiveData()
+    val sendSensorReadingsLiveData: MutableLiveData<ArrayList<SensorReading>> = MutableLiveData()
     val showRecyclerViewLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val showEmptyViewLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val showLoadMoreLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val enableLoadMoreLiveData: MutableLiveData<Boolean> = MutableLiveData()
+
+    var pageNumber: Int = 0
+    var isLoading = false
+    lateinit var sensorId: String
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
@@ -38,12 +46,21 @@ class SensorReadingsViewModel : BaseViewModel() {
     }
 
     fun loadSensorReadings(sensorId: String) {
+        this.sensorId = sensorId
+
+        loadMoreSensorReadings()
+    }
+
+    fun loadMoreSensorReadings() {
+        pageNumber++
+
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_MONTH, -7)
+        calendar.add(Calendar.DAY_OF_MONTH, -DAYS_AGO)
         val dateString = Dates.getFormattedDateString(calendar.timeInMillis,
             Dates.SERVER_FORMAT_SHORT)
 
-        val disposable = remoteApiInterface.getLatestSensorReadings(sensorId, dateString)
+        val disposable = remoteApiInterface.getLatestSensorReadings(sensorId, dateString,
+            pageNumber, PAGE_SIZE)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { onRetrieveSensorReadingsStart() }
@@ -56,22 +73,30 @@ class SensorReadingsViewModel : BaseViewModel() {
     }
 
     private fun onRetrieveSensorReadingsStart() {
+        isLoading = true
         showLoadingLiveData.value = true
+        enableLoadMoreLiveData.value = false
     }
 
     private fun onRetrieveSensorReadingsFinish() {
+        isLoading = false
         showLoadingLiveData.value = false
+        enableLoadMoreLiveData.value = true
     }
 
     private fun onRetrieveSensorReadingsSuccess(response: GetSensorReadingsResponse) {
         Log.d(TAG, "onRetrieveSensorReadingsSuccess: $response")
 
-        val isEmpty = response.data.isNullOrEmpty()
-        showEmptyViewLiveData.value = isEmpty
-        showRecyclerViewLiveData.value = !isEmpty
+        if (response.result?.code != 200) {
+            showAlertLiveData.value = response.result?.message
+        }
 
+        val isAllEmpty = response.data.isNullOrEmpty() && pageNumber <= 1
+        showEmptyViewLiveData.value = isAllEmpty
+        showRecyclerViewLiveData.value = !isAllEmpty
+        showLoadMoreLiveData.value = !response.data.isNullOrEmpty()
 
-        sendSensorReadingsLiveData.value = response.data
+        sendSensorReadingsLiveData.value = response.data as ArrayList
     }
 
     private fun onRetrieveSensorReadingsError() {

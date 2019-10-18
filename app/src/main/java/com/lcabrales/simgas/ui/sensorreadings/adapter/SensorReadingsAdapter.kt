@@ -10,13 +10,19 @@ import com.lcabrales.simgas.common.Dates
 import com.lcabrales.simgas.databinding.ItemSensorReadingBinding
 import com.lcabrales.simgas.model.readings.SensorReading
 
-class SensorReadingsAdapter(private val dataset: List<SensorReading>) :
+class SensorReadingsAdapter(private val dataset: ArrayList<SensorReading>) :
     RecyclerView.Adapter<SensorReadingItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SensorReadingItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding = ItemSensorReadingBinding.inflate(layoutInflater, parent, false)
         return SensorReadingItemViewHolder(itemBinding)
+    }
+
+    fun addData(list: List<SensorReading>) {
+        val startPosition = itemCount
+        dataset.addAll(list)
+        notifyItemRangeChanged(startPosition, itemCount)
     }
 
     override fun getItemCount(): Int {

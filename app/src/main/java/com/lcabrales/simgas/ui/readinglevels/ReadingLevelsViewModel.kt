@@ -36,10 +36,6 @@ class ReadingLevelsViewModel : BaseViewModel() {
     private lateinit var sensorDailyAverageList: MutableList<SensorDailyAverage>
     private lateinit var selectedDaysFilter: DaysAgoFilter
 
-    init {
-        //init is empty because the View will init with the spinner selection
-    }
-
     override fun onCleared() {
         super.onCleared()
         disposables.dispose()

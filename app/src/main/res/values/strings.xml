@@ -88,6 +88,7 @@
     <!--region LastReadings-->
     <string name="last_readings_activity_title">Lecturas de los últimos 7 días</string>
     <string name="last_readings_activity_empty_text">@string/empty_text</string>
+    <string name="last_readings_activity_load_more">Cargar más</string>
     <!--endregion-->
 
     <!--region ReadingLevels-->
