@@ -7,7 +7,7 @@
 
     <!--region Common-->
     <string name="network_error">Ha ocurrido un error de conexión</string>
-    <string name="ppm_value">%d ppm</string>
+    <string name="ppm_value">%s ppm</string>
     <string name="empty_text">No hay datos para mostrar</string>
     <string name="close">Cerrar</string>
     <string name="range_separator" translatable="false">-</string>

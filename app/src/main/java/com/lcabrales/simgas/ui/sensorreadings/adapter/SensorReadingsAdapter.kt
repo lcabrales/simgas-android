@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lcabrales.simgas.R
 import com.lcabrales.simgas.common.Dates
+import com.lcabrales.simgas.common.Utils
 import com.lcabrales.simgas.databinding.ItemSensorReadingBinding
 import com.lcabrales.simgas.model.readings.SensorReading
 
@@ -40,7 +41,7 @@ class SensorReadingsAdapter(private val dataset: ArrayList<SensorReading>) :
         holder.getBinding().tvAirQualityValue.text = item.airQuality?.name
 
         holder.getBinding().tvValue.text = context.getString(R.string.ppm_value,
-            item.gasPpm)
+            Utils.getFormattedDecimalValue(item.gasPpm!!))
 
         val progressVal = (item.gasPercentage!! * holder.getBinding().pbValue.max).toInt()
         holder.getBinding().pbValue.progress = progressVal

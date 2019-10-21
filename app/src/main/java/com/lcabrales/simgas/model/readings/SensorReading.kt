@@ -11,13 +11,13 @@ data class SensorReading(
     @Json(name = "AirQuality")
     var airQuality: AirQuality? = null,
     @Json(name = "ReadingVolts")
-    var readingVolts: Int? = null,
+    var readingVolts: Double? = null,
     @Json(name = "SensorResistance")
-    var sensorResistance: Int? = null,
+    var sensorResistance: Double? = null,
     @Json(name = "KnownConcentrationSensorResistance")
-    var knownConcentrationSensorResistance: Int? = null,
+    var knownConcentrationSensorResistance: Double? = null,
     @Json(name = "GasPpm")
-    var gasPpm: Int? = null,
+    var gasPpm: Double? = null,
     @Json(name = "GasPercentage")
     var gasPercentage: Double? = null,
     @Json(name = "CreatedDate")

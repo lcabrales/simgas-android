@@ -15,6 +15,13 @@ object Utils {
         return String.format(Locale.US, "%s%%", df.format(percent))
     }
 
+    fun getFormattedDecimalValue(decimal: Double): String {
+        val df = DecimalFormat("#.###")
+        df.roundingMode = RoundingMode.HALF_EVEN
+
+        return df.format(decimal)
+    }
+
     fun getChartColors(context: Context, qty: Int): List<Int> {
         val retColors = ArrayList<Int>()
 
