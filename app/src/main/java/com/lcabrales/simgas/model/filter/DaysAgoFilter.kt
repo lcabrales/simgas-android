@@ -12,7 +12,6 @@ class DaysAgoFilter(
         fun getDefaultFilters(context: Context): MutableList<DaysAgoFilter> {
             val filters = ArrayList<DaysAgoFilter>()
 
-            filters.add(DaysAgoFilter(1, context.getString(R.string.past_day)))
             filters.add(DaysAgoFilter(7, context.getString(R.string.past_week)))
             filters.add(DaysAgoFilter(30, context.getString(R.string.past_month)))
             filters.add(DaysAgoFilter(90, context.getString(R.string.past_trimester)))
