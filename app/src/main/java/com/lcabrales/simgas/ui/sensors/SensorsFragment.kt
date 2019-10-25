@@ -79,4 +79,16 @@ class SensorsFragment : BaseFragment(), SensorsFragmentInterface {
     fun refreshSensors() {
         viewModel.loadSensors()
     }
+
+    override fun onStart() {
+        viewModel.startPolling()
+
+        super.onStart()
+    }
+
+    override fun onStop() {
+        viewModel.stopPolling()
+
+        super.onStop()
+    }
 }

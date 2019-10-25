@@ -30,20 +30,24 @@ class SensorsViewModel : BaseViewModel() {
     val sendSensorsDataLiveData: MutableLiveData<List<Sensor>> = MutableLiveData()
 
     private val disposables: CompositeDisposable = CompositeDisposable()
-    private val timer = Timer()
+    private lateinit var timer: Timer
+    private var isPollingActive = false
 
     init {
-        pollForSensorsData()
+        startPolling()
     }
 
     override fun onCleared() {
         super.onCleared()
         disposables.dispose()
-        timer.cancel()
+        stopPolling()
     }
 
-    private fun pollForSensorsData() {
+    fun startPolling() {
+        if (isPollingActive) return
+
         val handler = Handler()
+        timer = Timer()
         val pollTask = object : TimerTask() {
             override fun run() {
                 handler.post {
@@ -52,6 +56,12 @@ class SensorsViewModel : BaseViewModel() {
             }
         }
         timer.schedule(pollTask, 0, POLL_DELAY) //execute periodically
+        isPollingActive = true
+    }
+
+    fun stopPolling() {
+        timer.cancel()
+        isPollingActive = false
     }
 
     fun loadSensors() {
