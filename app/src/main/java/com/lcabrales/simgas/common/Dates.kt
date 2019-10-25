@@ -36,7 +36,7 @@ object Dates {
         return format.parse(localDate)
     }
 
-    fun getRelativeTimeString(timeInMillis: Long, locale: Locale = Locale.getDefault()): String {
+    fun getRelativeTimeString(timeInMillis: Long, locale: Locale = Locale("es", "ES")): String {
         val messages = TimeAgoMessages.Builder().withLocale(locale).build()
         return TimeAgo.using(timeInMillis, messages)
     }
